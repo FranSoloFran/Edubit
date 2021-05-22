@@ -1,0 +1,212 @@
+
+//NAVBAR
+.user__container-logo{
+    align-items: center;
+    background-color: $dark;
+    display: flex;
+    height: 70px; 
+    justify-content: space-between;
+    width: 100vw;    
+}
+
+.user__hamburguer{
+    margin-left: 20px;
+}
+
+.user__logo{
+    background-image: url('../../assets/img/edubit_logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 50px;
+    width: 200px;
+    z-index: 999;
+}
+
+
+.user__label-check {
+    background-color: white;
+    cursor: pointer;
+    height: 0.25em;
+    position: absolute;
+    width: 2em;
+    
+  
+    &::before,
+    &::after {
+        background-color: white;
+        color: red;
+        content: "";
+        display: block;
+        height: 0.25em;
+        position: absolute;      
+        transition: all 0.6s var(--animation-curve);
+        width: 2em;
+    }
+  
+    &::before {
+        left: 0%;
+        transform: rotateZ(0deg);
+        transform-origin: left top;
+        top: -250%;
+    }
+  
+    &::after {
+      bottom: -250%;
+      left: 0%;
+      transform: rotateZ(0deg);
+      transform-origin: left bottom;
+    }
+  }
+  
+  .user__input-check:checked ~ .user__label-check::before {
+    background-color: red;
+    content: "";
+    left: 10%;
+    transform: rotateZ(41deg);
+  }
+  
+  .user__input-check:checked ~ .user__label-check::after {
+    background-color: red;
+    content: "";
+    left: 10%;
+    transform: rotateZ(-41deg);    
+  }
+  
+  .user__input-check:checked ~ .user__label-check {
+    background-color: black;
+  }
+  
+  .user__input-check ~ .user__label-check {
+    transition: all 0.5s var(--animation-curve);
+  }
+  
+  .user__container-logo input {
+    display: none;
+  }
+
+
+
+
+
+
+//MENU
+.user__sidebar-hide{
+    margin-left: -1000px;
+}
+
+.user__sidebar{
+    background-color: $dark;    
+    color:white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-left: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: fixed;
+    width: 300px;    
+}
+
+.user__sidebar-navbar{
+    align-items: center;    
+    display:flex;    
+}
+
+
+.user__sidebar-link{
+    color: white;
+    font-size: 20px;
+    margin-right: 50px;
+    text-decoration: none;    
+    
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+
+//BUTTONS MENU
+.user__sidebar-navbar> ul { 
+    margin: 0;
+    padding: 0;
+}
+
+.user__sidebar-navbar > ul li  {
+    margin-bottom: 0px; 
+    
+    &:hover{
+        text-decoration: none;  
+        color: #98D7EC;       
+    }
+}
+
+.user__sidebar-navbar > ul li a {  
+    border-bottom: 1px solid #ffffff; 
+    color: #ffffff;  
+    display:block; 
+    font-size: 20px;
+    padding: 20px 70px;  
+    text-decoration: none;  
+}
+
+.user__sidebar-navbar a>span{    
+    left:-30px; 
+    position: relative;
+}
+
+.active{
+    background-color:#22252E
+}
+
+.active > ul li a{
+    color:#98D7EC;
+    &:hover{
+        color:#98D7EC;
+    }
+}
+
+
+
+//SUBMENUS
+.user__submenu-item ul{
+    margin-left: -40px;
+    list-style: none; 
+}
+
+.user__submenu-item > ul li{
+    padding-left: 30px;
+    
+    &:hover{
+        text-decoration: none;  
+        color: #98D7EC;       
+    }
+}
+
+.user__submenu-item ul, 
+.user__submenu-item input[type="checkbox"]{
+    display: none;
+
+}
+
+.user__submenu-item input:checked ~ ul{
+    display: block;
+}
+
+.user__submenu-item label{
+    border-bottom: 1px solid #ffffff; 
+    color: #ffffff; 
+    display: block;
+    font-size: 20px;
+    margin-right: 50px;
+    padding: 20px 70px; 
+    width: 100%;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.user__submenu-item label>span{
+    left:-30px; 
+    position: relative;   
+}

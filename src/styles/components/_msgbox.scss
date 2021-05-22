@@ -1,0 +1,109 @@
+
+
+.msgbox__container{  
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    width: 100vw;
+    z-index: 999;
+}
+
+.msgbox__container-background{
+    background-color: grey;   
+    height: 100vh;
+    position: fixed;
+    opacity: 0.7;
+    top: 0px;
+    width: 100vw;
+}
+
+
+.msgbox__section-card{    
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+
+.msgbox__card{
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;    
+    height: auto;  
+    padding-bottom: 50px;  
+    width: 500px;
+    z-index: 999;
+}
+
+.msgbox__card-img{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.msgbox__card-title{
+    color: $dark-grey;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.msgbox__card-boyd{
+    color: $dark-grey;
+    font-size: 20px;
+    margin: auto;
+    margin-bottom: 50px;
+    text-align: center;
+    width: 90%;
+}
+
+.msgbox__card-button{
+    background-color: $primary;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    height: 40px;
+    width: 150px;
+}
+
+
+
+.msgbox__error, .msgbox__ok, .msgbox__warning{
+    animation: showcolor 1.5s ease-in-out;;
+    animation-delay: -0.5s;
+    border-radius: 50px;
+    font-size: 40px;
+    padding: 15px 15px 15px 15px;     
+}
+
+.msgbox__error{
+    border: 3px solid red;
+    color: red;     
+}
+
+.msgbox__ok{    
+    border: 3px solid #02b902;
+    color: #02b902; 
+}
+
+.msgbox__warning{
+    border: 3px solid #f0a51b;
+    color: #f0a51b;
+}
+
+
+@keyframes showcolor{
+    0%{
+        font-size: 0px;
+        color: gray;
+        border: 1px solid gray;
+    }
+    80%,
+    100%{
+        font-size: 40px;
+        color: gray;
+        border: 3px solid gray;
+    }   
+}
