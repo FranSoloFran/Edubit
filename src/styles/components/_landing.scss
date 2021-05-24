@@ -1,0 +1,46 @@
+//BODY
+.landing_container {
+  background-color: lighten($color: $dark-grey, $amount: 75);
+  overflow-y: hidden;
+  width: 100vw;
+  padding-top: 150px;
+}
+
+.landing_main_title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 10vh;
+}
+
+.landing__container_modulos_edubit {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.landing_titles {
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.landing__modulos_edubit {
+  display: flex;
+  flex-direction: column;
+  height: 270px;
+  width: 100%;
+  align-items: center;
+}
+
+.landing__img_modulos_edubit {
+  height: 140px;
+  width: 220px;
+}
+
+.landing__img_modulos_edubit img {
+  max-width: 100%;
+  max-height: 100%;
+}
