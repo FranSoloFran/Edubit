@@ -52,7 +52,6 @@ export const AppRoutes = () => {
                     />
 
                     <PrivateRoute
-                        exact
                         path="/user"
                         component={UserRoute}
                         isAuthenticated={isLoggedIn}

@@ -1,0 +1,201 @@
+
+
+
+
+.trading__user{
+    background-color: black;
+    margin-top: 68px;
+    width: 400px;
+}
+
+
+
+
+
+
+//MENU DE OPERACIONES Y DINERO DISPONIBLE
+.trading__user-menu{
+    color: white;
+    margin: auto;
+    width: 90%;
+}
+
+
+.trading__user-menu-title{
+    font-size: 17px;
+    margin: auto;
+    margin-top: 30px;    
+    text-align: center;
+    width: 90%;
+}
+
+
+
+//TABLA DEL MENU DE USUARIO
+
+.trading__user-menu-container-table{   
+    display: block;
+    margin: auto;
+    margin-top: 60px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+
+    &::-webkit-scrollbar{
+        width: 0px;     
+    }      
+}
+
+.trading__user-menu-table-title{    
+    font-weight: bold;
+    margin: auto;
+    margin-bottom: 30px;
+    text-align: center;    
+}
+
+
+.trading__user-menu-table{
+    list-style: none;
+    height: 500px;
+    margin: 0;
+    padding: 0;
+}
+
+.trading__user-menu-table li{ 
+    margin: auto;
+    margin-top: 30px;    
+    width: 90%;
+}
+
+.trading__user-menu-table li img{
+    height: 25px;
+    width: 25px;
+}
+
+.trading__user-menu-table-row{  
+    align-items: center;
+    display: flex;
+    flex-direction: row;    
+    justify-content: space-between;    
+}
+
+.trading__user-menu-table-row span{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.trading__user-menu-table-row button{
+    background: none;
+    border: 1px solid #02b902;
+    border-radius: 5px;
+    color: #02b902;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 3px 0px 3px 0px;
+    width: 75px;
+    transition: transform .2s;
+
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
+.trading__user-menu-table-row-sold{
+    border: 2px solid red;
+    color: red;
+
+    transition: transform .2s;
+
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
+.trading__user-menu-table-row-buy{
+    border: 2px solid #02b902;
+    color: #02b902;
+    
+    transition: transform .2s;
+
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
+
+//BOTONES DEL MENU DE USUARIO
+.trading__user-menu-buttons{
+    display: flex;
+    flex-direction: column;
+}
+
+.trading__user-menu-buy{
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size:  18px;   
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: auto;
+    margin-top: 10px;
+    padding: 8px 10px 8px 10px;
+    width: 250px;
+
+    transition: color .3s ease;
+
+    &:focus{
+        outline:none
+    }
+
+    &:hover{
+        color: darken($color: white, $amount: 20);
+    }
+}
+
+.trading__user-menu-buy{
+    background-color: #02b902;    
+} 
+
+
+
+//RESPONSIVE
+@media (max-width:900px){
+
+    .trading__user{
+        height: 400px;
+        width: 100vw;
+    }
+
+    .trading__user-menu{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;    
+        margin: auto;
+        width: 90%;
+    }
+
+    
+    //MUESTRA LA INFORMACION DEL USUARIO
+    .trading__user-menu-title{
+        font-size: 17px;
+        margin: auto;
+        margin-top: 30px;    
+        text-align: center;
+        width: 150px;
+    }
+
+
+    //BOTON DE COMPRA
+    .trading__user-menu-buy{
+        height: 50px;
+        margin-top: 30px;
+        width: 150px;
+    }
+
+    .trading__user-menu-container-table{
+        height: 250px;
+        width: 100%;
+    }
+}

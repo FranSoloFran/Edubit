@@ -22,15 +22,15 @@
     background-color: #ffffff; 
     border: 1px solid grey;  
     border-radius: 10px;
-    height: 580px;
+    height: 600px;
     margin-top: 60px;
-    min-width: 250px;
     max-width: 400px;
+    min-width: 250px;    
     width: 99%;
 }
 
 .auth__box-login{
-    height: 580px;
+    height: 100%;
     margin: auto;
     position: relative;
     top:70px;    
@@ -38,7 +38,7 @@
 
 
 //rectangulo de título y pie
-.auth__rectangle-upper, .auth__rectangle-footer{
+.auth__rectangle-upper, .auth__rectangle-footer, .auth__rectangle-footer-register{
     background-color: black;
     height: 70px;
     margin-bottom: 30px;
@@ -49,8 +49,12 @@
     margin-top: -73px;
 }
 .auth__rectangle-footer{
-    margin-top: 70px;
+    margin-top: 75px;
 }
+.auth__rectangle-footer-register{
+    margin-top: 50px;
+}
+
 .auth__box-img{
     background-color: black;
     background-image: url('../../assets/img/edubit_logo.png');
@@ -76,6 +80,7 @@
 }
 
 .auth__link{
+    margin-top: 20px;
     text-decoration: none;
 
     &:hover{

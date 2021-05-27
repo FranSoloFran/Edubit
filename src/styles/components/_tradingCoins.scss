@@ -1,0 +1,80 @@
+
+
+.trading__coins{
+    background-color: lighten($color: $dark-grey, $amount: 75);  
+    height: 100px;
+    margin-top: 80px; 
+    min-width: 500px;
+    width: 100%;
+}
+
+.trading__coins-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.trading__coins-button{
+    background-color: #193049;
+    border:none;
+    color: white;
+    cursor: pointer;
+    font-size: 25px;
+    height: 60px;
+    margin-left: 10px; 
+    min-width: 60px;   
+    width: 60px;
+}
+
+.trading__coins-group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    margin-right: 20px;
+}
+
+.trading__coins-name{
+    align-items: center;
+    background-color: #193049;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    height: 60px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    min-width: 150px;
+    width: 150px;
+}
+
+.trading__coins-name > span{
+    cursor: pointer;
+    margin-left: 130px;
+    margin-top: -90px;
+}
+
+.trading__coins-name img{
+    height: 30px;
+    margin-left: -30px;
+    width: 30px;
+}
+
+
+.trading__coins-name-s1{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 50px;
+}
+
+
+.trading__coins-name-active{
+    background-color: $primary;
+}
+
