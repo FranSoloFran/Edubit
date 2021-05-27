@@ -1,0 +1,29 @@
+
+.trading__screen{
+    background-color: lighten($color: $dark-grey, $amount: 75);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.trading__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+//RESPONSIVE
+@media (max-width:900px){
+    .trading__screen{
+        flex-wrap: wrap;
+    }
+}
+
+
+@import './tradingCoins.scss';
+@import './tradingBooks.scss';
+@import './tradingUser.scss';

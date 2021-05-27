@@ -78,7 +78,7 @@ export const NavBarUser = () => {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="/user" >
+                                                <Link to="/user/trading" >
                                                     <span className="icon-stats-dots"></span>
                                                     Cotizaciones
                                                 </Link>

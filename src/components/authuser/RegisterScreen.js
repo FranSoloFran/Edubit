@@ -141,7 +141,7 @@ export const RegisterScreen = () => {
                                 </div>
 
                                 <button
-                                    className="btn btn-primary btn-block"
+                                    className="btn btn-primary btn-block mb-5"
                                     type="submit"
                                 >
                                     Registrar
@@ -156,7 +156,7 @@ export const RegisterScreen = () => {
                             </div>
                         </form>
 
-                        <div className="auth__rectangle-footer"></div>
+                        <div className="auth__rectangle-footer-register"></div>
                     </div>
                 </div>
             </div>
