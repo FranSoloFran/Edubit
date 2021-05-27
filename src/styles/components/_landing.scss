@@ -1,3 +1,17 @@
+
+.landing__screen{
+  background-color: lighten($color: $dark-grey, $amount: 75);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  height: 100vh;
+}
+
+.landing__main-content-body{
+  height: 669px;
+}
+
 //BODY
 .landing_container {
   background-color: lighten($color: $dark-grey, $amount: 75);

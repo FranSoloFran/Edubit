@@ -15,7 +15,7 @@ export const AuthRoute = () => {
         <Switch>
             <Route exact path="/homepage" component={HomeScreen} />
             <Route exact path="/homepage/login" component={LoginScreen} />
-            <Route exact path="/homepage/register" component={RegisterScreen} />
+            <Route exact path="/homepage/register" component={RegisterScreen} />            
             <Redirect to="/homepage" />
         </Switch>
 

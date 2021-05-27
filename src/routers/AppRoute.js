@@ -12,48 +12,9 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { LandingRoute } from "./LandingRoute";
 
+
+
 export const AppRoutes = () => {
-<<<<<<< HEAD
-  const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    dispatch(loadingCheck(true));
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user?.uid) {
-        dispatch(login(user.uid, user.name));
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    });
-    dispatch(loadingCheck(false));
-  }, [dispatch, setIsLoggedIn]);
-
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <PublicRoute
-            path="/homepage"
-            component={AuthRoute}
-            isAuthenticated={isLoggedIn}
-          />
-
-          <PrivateRoute
-            exact
-            path="/landingpage"
-            component={LandingRoute}
-            isAuthenticated={isLoggedIn}
-          />
-
-          <Redirect to="/homepage" />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
-=======
 
     const dispatch = useDispatch();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -86,8 +47,8 @@ export const AppRoutes = () => {
                     />
 
                     <PrivateRoute
-                        path="/user"
-                        component={UserRoute}
+                        path="/landingpage"
+                        component={LandingRoute}
                         isAuthenticated={isLoggedIn}
                     />
 
@@ -98,4 +59,3 @@ export const AppRoutes = () => {
         </Router>
     )
 }
->>>>>>> simulaciones

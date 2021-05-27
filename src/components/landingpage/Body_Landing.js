@@ -12,7 +12,7 @@ export const BodyLanding = () => {
       <p className="landing_main_title">Seleccione un módulo para comenzar</p>
       <div className="landing__container_modulos_edubit">
         <div className="landing__modulos_edubit">
-          <Link to="/landingpage">
+          <Link to="/landingpage/trading">
             <div className="landing__img_modulos_edubit">
               <img src={Sim} alt="" />
             </div>

@@ -9,13 +9,15 @@ export const NavBarUser = () => {
 
     const dispatch = useDispatch();
     const [classA, setClassA] = useState("circle-right");
+    const [check, setChecked] = useState("");
 
 
     //Oculta el menú
     const [isLoading, setIsLoading] = useState(false);
     const buttonHandler = () => {
         setIsLoading(isLoading => !isLoading);
-        setClassA("circle-right")
+        setClassA("circle-right");
+        if (check === "" ? setChecked("open") : setChecked(""));
     }
 
 
@@ -31,11 +33,12 @@ export const NavBarUser = () => {
 
     return (
         <>
-            <div className="user__container-logo">
-                <div className="user__hamburguer" >
-                    <input className="user__input-check" type="checkbox" id="toggle" onChange={buttonHandler} />
-                    <label className="user__label-check" htmlFor="toggle" />
-                </div>
+            <div className="user__container-logo"  >
+                <div onClick={buttonHandler} className={`user__hamburguer user__hamburguer-${check}`}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>               
                 <div className="user__logo mt-1"></div>
             </div>
 
@@ -45,13 +48,13 @@ export const NavBarUser = () => {
                         <div className="user__sidebar-navbar">
                             <ul className="user__sidebar-li">
                                 <li className="user__sidebar-li">
-                                    <Link to="/user" >
+                                    <Link to="/landingpage" >
                                         <span className="icon-user"></span>
                                         Perfil
                                     </Link>
                                 </li>
                                 <li className="user__sidebar-li">
-                                    <Link to="/user" >
+                                    <Link to="/landingpage" >
                                         <span className="icon-library"></span>
                                         Textos Guiados
                                     </Link>
@@ -66,19 +69,19 @@ export const NavBarUser = () => {
 
                                         <ul>
                                             <li>
-                                                <Link to="/user" >
+                                                <Link to="/landingpage" >
                                                     <span className="icon-coin-dollar"></span>
                                                     Portafolio
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="/user" >
+                                                <Link to="/landingpage" >
                                                     <span className="icon-hour-glass"></span>
                                                     Transacciones
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="/user/trading" >
+                                                <Link to="/landingpage/trading" >
                                                     <span className="icon-stats-dots"></span>
                                                     Cotizaciones
                                                 </Link>
@@ -88,7 +91,7 @@ export const NavBarUser = () => {
 
                                 </li>
                                 <li className="user__sidebar-li">
-                                    <Link to="/user" >
+                                    <Link to="/landingpage" >
                                         <span className="icon-play"></span>
                                         Videos
                                     </Link>

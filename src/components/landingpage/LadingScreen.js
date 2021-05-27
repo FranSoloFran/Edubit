@@ -8,8 +8,9 @@ export const LandingScreen = () => {
     <div className="landing__screen">
       <div className="landing__main-content-body">
         <BodyLanding />
-        <FooterHome />
       </div>
+      
+      <FooterHome />
     </div>
   );
 };

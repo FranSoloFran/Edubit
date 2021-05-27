@@ -1,14 +1,4 @@
 //NAVBAR
-<<<<<<< HEAD
-.user__container-logo {
-  align-items: center;
-  background-color: $dark;
-  display: flex;
-  height: 70px;
-  justify-content: space-between;
-  width: 100vw;
-  position: fixed;
-=======
 .user__container-logo{
     align-items: center;
     background-color: $dark;
@@ -17,23 +7,9 @@
     justify-content: space-between;
     position: fixed;
     width: 100vw;    
->>>>>>> simulaciones
 }
 
-.user__hamburguer {
-  margin-left: 20px;
-}
 
-<<<<<<< HEAD
-.user__logo {
-  background-image: url("../../assets/img/edubit_logo.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 50px;
-  width: 200px;
-  z-index: 999;
-  padding-left: 15px;
-=======
 .user__logo{
     background-image: url('../../assets/img/edubit_logo.png');
     background-repeat: no-repeat;
@@ -42,87 +18,90 @@
     margin-right: 30px;
     width: 200px;
     z-index: 999;
->>>>>>> simulaciones
 }
 
-.user__label-check {
-  background-color: white;
+
+.user__hamburguer {
   cursor: pointer;
-  height: 0.25em;
-  position: absolute;
-  width: 2em;
-
-  &::before,
-  &::after {
-    background-color: white;
-    color: red;
-    content: "";
-    display: block;
-    height: 0.25em;
-    position: absolute;
-    transition: all 0.6s var(--animation-curve);
-    width: 2em;
-  }
-
-  &::before {
-    left: 0%;
-    transform: rotateZ(0deg);
-    transform-origin: left top;
-    top: -250%;
-  }
-
-  &::after {
-    bottom: -250%;
-    left: 0%;
-    transform: rotateZ(0deg);
-    transform-origin: left bottom;
-  }
+  height: 45px;
+  margin-left: 30px;
+  width: 60px;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;  
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);  
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
 }
 
-.user__input-check:checked ~ .user__label-check::before {
-  background-color: red;
-  content: "";
-  left: 10%;
-  transform: rotateZ(41deg);
+
+.user__hamburguer span {
+  background: white;
+  border-radius: 9px;
+  display: block;
+  height: 9px;
+  left: 0;
+  opacity: 1;
+  position: absolute; 
+  width: 100%;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+  
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);  
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;  
 }
 
-.user__input-check:checked ~ .user__label-check::after {
-  background-color: red;
-  content: "";
-  left: 10%;
-  transform: rotateZ(-41deg);
+.user__hamburguer span:nth-child(1){
+  top: 0px;
 }
 
-.user__input-check:checked ~ .user__label-check {
-  background-color: black;
+.user__hamburguer span:nth-child(2) {
+  top: 18px;
 }
 
-.user__input-check ~ .user__label-check {
-  transition: all 0.5s var(--animation-curve);
+.user__hamburguer span:nth-child(3) {
+  top: 36px;
 }
 
-.user__container-logo input {
-  display: none;
+.user__hamburguer-open span:nth-child(1) {
+  background: red;
+  transform: rotate(135deg);
+  top: 18px;    
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
 }
+
+.user__hamburguer-open span:nth-child(2) {  
+  background: red;
+  left: -60px;
+  opacity: 0;
+}
+
+.user__hamburguer-open span:nth-child(3) {
+  background: red;
+  top: 18px;
+  transform: rotate(-135deg);  
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+}
+
+
+
+
 
 //MENU
 .user__sidebar-hide {
   margin-left: -1000px;
 }
 
-<<<<<<< HEAD
-.user__sidebar {
-  background-color: $dark;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  margin-left: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  position: fixed;
-  margin-top: 70px;
-=======
 .user__sidebar{
     background-color: $dark;    
     color:white;
@@ -134,8 +113,7 @@
     padding-left: 10px;
     padding-right: 10px;
     position: fixed;
-    width: 300px;    
->>>>>>> simulaciones
+    width: 350px;    
 }
 
 .user__sidebar-navbar {
@@ -147,7 +125,7 @@
   color: white;
   font-size: 20px;
   margin-right: 50px;
-  text-decoration: none;
+  text-decoration: none;  
 
   &:hover {
     text-decoration: none;
@@ -155,20 +133,16 @@
 }
 
 //BUTTONS MENU
-<<<<<<< HEAD
-.user__sidebar-navbar > ul {
-  margin: 0;
-  padding: 0;
-=======
 .user__sidebar-navbar> ul { 
     list-style:none;
     margin: 0;    
-    padding: 0;    
->>>>>>> simulaciones
+    padding: 0;   
+    width: 100%; 
 }
 
 .user__sidebar-navbar > ul li {
   margin-bottom: 0px;
+ 
 
   &:hover {
     text-decoration: none;
@@ -203,8 +177,8 @@
 
 //SUBMENUS
 .user__submenu-item ul {
-  margin-left: -40px;
-  list-style: none;
+  list-style: none;  
+  margin-left: -40px;  
 }
 
 .user__submenu-item > ul li {
