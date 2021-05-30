@@ -1,53 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import {
+  coinsMarketsAPI,
+  updateCoinsSelection,
+} from "../../../reducers/tradingReducer";
 
 export const TradingCoins = () => {
+  const dispatch = useDispatch();
 
-    return (
-        <div className="trading__coins">
-            {/* las monedas que podes ver en el mercado, porner un máximo de 5 */}
-            <section className="trading__coins-container">
-                <button className="trading__coins-button">
-                    <span className="icon-plus"></span>
+  const listCoins = useSelector((state) => state.trading.marketCoins);
+  const [showListCoins, setShowListCoins] = useState(false);
+  const [selectedCoins, setSelectedCoins] = useState([]);
+
+  useEffect(() => {
+    dispatch(coinsMarketsAPI());
+  }, [dispatch]);
+
+  const listCoinSelected = (coin) => {
+    let selectedCoinAlreadyExist = selectedCoins.filter((itemCoin) => {
+      return itemCoin.name === coin.name;
+    });
+    if (selectedCoinAlreadyExist.length === 0) {
+      setSelectedCoins([...selectedCoins, coin]);
+      dispatch(updateCoinsSelection(selectedCoins));
+      setShowListCoins(false);
+    }
+  };
+
+  const deleteSelectedCoin = (coin) => {
+    setSelectedCoins(
+      selectedCoins.filter((itemCoin) => {
+        return itemCoin.name !== coin.name;
+      })
+    );
+    dispatch(updateCoinsSelection(selectedCoins));
+  };
+
+  return (
+    <div className="trading__coins">
+      {/* las monedas que podes ver en el mercado, poner un máximo de 5 */}
+      <section className="trading__coins-container">
+        <button
+          className="trading__coins-button"
+          onClick={() => setShowListCoins(!showListCoins)}
+        >
+          <span className="icon-plus"></span>
+        </button>
+
+        {showListCoins && listCoins.length > 0 && (
+          <div role="list" className="trading__coins-list">
+            {listCoins.map((coin) => (
+              <div className="trading__coins-item-list" key={coin.id}>
+                <button onClick={() => listCoinSelected(coin)}>
+                  <img src={coin.image} alt={coin.name} /> {coin.name}
                 </button>
+              </div>
+            ))}
+          </div>
+        )}
 
-                <div className="trading__coins-group">
-                    <div className="trading__coins-name trading__coins-name-active">
-                        <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="" />
-                        <section className="trading__coins-name-s1">
-                            <span>Bitcoin</span>
-                            <span>222.32</span>
-                        </section>
-                        <span>x</span>
-                    </div>
-                    <div className="trading__coins-name">
-                        <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" alt="" />
-                        <section className="trading__coins-name-s1">
-                            <span>Ethereum</span>
-                            <span>150.00</span>
-                        </section>
-                        <span>x</span>
-                    </div>
-                    <div className="trading__coins-name">
-                        <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" alt="" />
-                        <section className="trading__coins-name-s1">
-                            <span>Binance Coin</span>
-                            <span>1012.20</span>
-                        </section>
-                        <span>x</span>
-                    </div>
-                    <div className="trading__coins-name">
-                        <img src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707" alt="" />
-                        <section className="trading__coins-name-s1">
-                            <span>Tether</span>
-                            <span>40.11</span>
-                        </section>
-                        <span>x</span>
-                    </div>
-
-                </div>
-            </section>
-
-        </div>
-    )
-}
+        {selectedCoins.length > 0 && (
+          <div className="trading__coins-group">
+            {selectedCoins.map((coin) => (
+              <div
+                className="trading__coins-name trading__coins-name-active"
+                key={coin.id}
+              >
+                <img src={coin.image} alt={coin.name} />
+                <section className="trading__coins-name-s1">
+                  <span>{coin.name}</span>
+                  <span>U$D {coin.current_price}</span>
+                </section>
+                <span onClick={() => deleteSelectedCoin(coin)}>x</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+};
