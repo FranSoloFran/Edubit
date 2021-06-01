@@ -13,6 +13,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
 }
 
 
@@ -21,9 +25,13 @@
     .trading__screen{
         flex-wrap: wrap;
     }
+    .trading__info{
+        width: 100%;
+    }
 }
 
 
 @import './tradingCoins.scss';
 @import './tradingBooks.scss';
+@import './tradingCharts';
 @import './tradingUser.scss';

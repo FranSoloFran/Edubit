@@ -2,6 +2,7 @@
     "usuario":{
         "uid": "string",
         "name": "string",
+        "money": "float",
         "trading":{
             "activo":[{
                 "idmoneda": "string",

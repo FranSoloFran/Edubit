@@ -7,6 +7,7 @@
     justify-content: space-between;
     position: fixed;
     width: 100vw;    
+    z-index: 800;
 }
 
 
@@ -23,9 +24,9 @@
 
 .user__hamburguer {
   cursor: pointer;
-  height: 45px;
+  height: 35px;
   margin-left: 30px;
-  width: 60px;
+  width: 40px;
   transform: rotate(0deg);
   transition: .5s ease-in-out;  
   -webkit-transform: rotate(0deg);
@@ -41,7 +42,7 @@
   background: white;
   border-radius: 9px;
   display: block;
-  height: 9px;
+  height: 5px;
   left: 0;
   opacity: 1;
   position: absolute; 
@@ -62,11 +63,11 @@
 }
 
 .user__hamburguer span:nth-child(2) {
-  top: 18px;
+  top: 12px;
 }
 
 .user__hamburguer span:nth-child(3) {
-  top: 36px;
+  top: 24px;
 }
 
 .user__hamburguer-open span:nth-child(1) {
@@ -206,7 +207,7 @@
   font-size: 20px;
   margin-right: 50px;
   padding: 20px 70px;
-  width: 100%;
+  width: 60%;
 
   &:hover {
     cursor: pointer;

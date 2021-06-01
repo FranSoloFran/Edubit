@@ -7,6 +7,7 @@ import { TradingUser } from './TradingUser';
 
 export const TradingScreen = () => {
 
+
     return (
         <div className="trading__screen">
             <section className="trading__info">

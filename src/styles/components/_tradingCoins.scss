@@ -1,6 +1,10 @@
+
+
+
+
 .trading__coins {
   background-color: lighten($color: $dark-grey, $amount: 75);
-  height: 100px;
+  height: auto;
   margin-top: 80px;
   min-width: 500px;
   width: 100%;
@@ -9,18 +13,6 @@
 .trading__coins-container {
   display: flex;
   flex-direction: row;
-}
-
-.trading__coins-button {
-  background-color: #193049;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 25px;
-  height: 60px;
-  margin-left: 10px;
-  min-width: 60px;
-  width: 60px;
 }
 
 .trading__coins-group {
@@ -45,6 +37,7 @@
   margin-bottom: 20px;
   margin-left: 10px;
   min-width: 150px;
+  padding-left: 10px;
   width: 150px;
 }
 
@@ -71,58 +64,5 @@
 }
 
 .trading__coins-name-active {
-  background-color: $primary;
-  padding-left: 10px;
-}
-
-.trading__coins-list {
-  position: absolute;
-  background-color: #193049;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  margin-top: 70px;
-  margin-left: 10px;
-  padding-left: 20px;
-  width: 190px;
-}
-
-.trading__coins-item-list {
-  &:hover {
-    background-color: #0275d8;
-  }
-}
-
-.trading__coins-item-list img {
-  height: 30px;
-  margin-left: -30px;
-  width: 30px;
-  padding-right: 10px;
-
-  &:hover {
-    background-color: #0275d8;
-  }
-}
-
-.trading__coins-item-list button {
-  display: flex;
-  flex-direction: row;
-  background-color: #193049;
-  border: none;
-  color: white;
-  cursor: pointer;
-  text-align: left;
-  align-items: center;
-  font-size: 25px;
-  height: 60px;
-  margin-left: 10px;
-  min-width: 60px;
-  width: 175px;
-
-  &:hover {
-    background-color: #0275d8;
-  }
+  background-color: $primary;  
 }

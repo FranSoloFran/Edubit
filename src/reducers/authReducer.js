@@ -1,29 +1,31 @@
 // import {types} from '../types/types';
-import { firebase, googleAuthProvider } from '../firebase/firebase-config';
+import { firebase, googleAuthProvider, db } from '../firebase/firebase-config';
 import { loadingCheck } from './loadingReducer';
 import { showError } from './msgboxReducer';
+import { returnDocuments } from '../helper/returnDocuments';
 
-
-const types={
-    login:'[Auth] Login',
+const types = {
+    login: '[Auth] Login',
     logout: '[Auth] Logout',
 }
 
 
 
 //REDUCERS
-export const authReducer = (state={}, action) =>{
+export const authReducer = (state = {}, action) => {
 
-    switch(action.type){
+    switch (action.type) {
         case types.login:
-            return{
+            return {
                 uid: action.payload.uid,
-                name: action.payload.name
+                name: action.payload.name,
+                money: action.payload.money,
+                documentId: action.payload.documentId
             }
-        
+
         case types.logout:
-             return {}
-        
+            return {}
+
         default:
             return state
     }
@@ -35,19 +37,19 @@ export const authReducer = (state={}, action) =>{
 
 
 //ACTIONS
-export const loginWithEmail = (email, password) =>{
-    return(dispatch) =>{
-
+export const loginWithEmail = (email, password) => {
+    return (dispatch) => {
         dispatch(loadingCheck(true));
-        firebase.auth().signInWithEmailAndPassword(email,password)
-        .then(({user}) =>{            
-            dispatch(login(user.uid,user.displayName));         
-            dispatch(loadingCheck(false));   
-        })
-        .catch(e =>{
-            dispatch(loadingCheck(false));
-            dispatch(showError('Error', e.message));
-        })
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(async ({ user }) => {
+                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
+                dispatch(login(user.uid, docRef[0].information.name, docRef[0].trading.money, docRef[0].id));
+                dispatch(loadingCheck(false));
+            })
+            .catch(e => {
+                dispatch(loadingCheck(false));
+                dispatch(showError('Error', e.message));
+            })
     }
 }
 
@@ -58,18 +60,31 @@ export const loginWithEmail = (email, password) =>{
 export const startRegisterWithEmail = (email, passwod, name) => {
     return (dispatch) => {
 
-        dispatch(loadingCheck(true));        
+        dispatch(loadingCheck(true));
         firebase.auth().createUserWithEmailAndPassword(email, passwod)
-        .then( async ({ user }) => {
-            await user.updateProfile({displayName: name});
+            .then(async ({ user }) => {
 
-            dispatch(login(user.uid,user.displayName));
-            dispatch(loadingCheck(false));
-        })
-        .catch( e=>{
-            dispatch(loadingCheck(false));
-            dispatch(showError('Error', e.message));
-        })
+                const newUserData = {
+                    information: {
+                        name: name,
+                        email: email,
+                        sexo: "",
+                        edad: ""
+                    },
+                    trading: {
+                        money: 10000.00
+                    }
+                }
+                await db.collection(`${user.uid}`).add(newUserData);
+                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
+
+                dispatch(login(user.uid, newUserData.information.name, newUserData.trading.money, docRef[0].id));
+                dispatch(loadingCheck(false));
+            })
+            .catch(e => {
+                dispatch(loadingCheck(false));
+                dispatch(showError('Error', e.message));
+            })
     }
 }
 
@@ -80,11 +95,26 @@ export const startGoogleLogin = () => {
     return (dispatch) => {
         dispatch(loadingCheck(true));
         firebase.auth().signInWithPopup(googleAuthProvider)
-            .then(({ user }) => {
-                dispatch(login(user.uid, user.displayName));
+            .then(async({ user }) => {
+
+                const newUserData = {
+                    information: {
+                        name: user.displayName,
+                        email: user.email,
+                        sexo: "",
+                        edad: ""
+                    },
+                    trading: {
+                        money: 10000.00
+                    }
+                }
+                await db.collection(`${user.uid}`).add(newUserData);
+                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
+                console.log(docRef);
+                dispatch(login(user.uid, newUserData.information.name, newUserData.trading.money, docRef[0].id));
                 dispatch(loadingCheck(false));
             })
-            .catch( e=>{
+            .catch(e => {
                 dispatch(loadingCheck(false));
                 dispatch(showError('Error', e.message));
             })
@@ -94,7 +124,7 @@ export const startGoogleLogin = () => {
 
 
 export const startLogout = () => {
-    return async (dispatch) =>{
+    return (dispatch) => {
         firebase.auth().signOut();
         dispatch(logout());
     }
@@ -104,12 +134,14 @@ export const startLogout = () => {
 
 
 
-export const login = (uid, name) =>{
-    return{
+export const login = (uid, name, money, documentId) => {
+    return {
         type: types.login,
-        payload:{
+        payload: {
             uid,
-            name
+            name,
+            money,
+            documentId
         }
     }
 }
@@ -117,6 +149,6 @@ export const login = (uid, name) =>{
 
 export const logout = () => {
     return {
-        type: types.logout,        
+        type: types.logout,
     }
 };
