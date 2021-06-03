@@ -1,37 +1,33 @@
-
-.trading__screen{
-    background-color: lighten($color: $dark-grey, $amount: 75);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 100vh;
-    width: 100vw;
+.trading__screen {
+  background-color: lighten($color: $dark-grey, $amount: 75);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100vw;
 }
 
-
-.trading__info{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+.trading__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
 }
-
 
 //RESPONSIVE
-@media (max-width:900px){
-    .trading__screen{
-        flex-wrap: wrap;
-    }
-    .trading__info{
-        width: 100%;
-    }
+@media (max-width: 900px) {
+  .trading__screen {
+    flex-wrap: wrap;
+  }
+  .trading__info {
+    width: 100%;
+  }
 }
 
-
-@import './tradingCoins.scss';
-@import './tradingBooks.scss';
-@import './tradingCharts';
-@import './tradingUser.scss';
+@import "./tradingCoins.scss";
+@import "./tradingBooks.scss";
+@import "./tradingCharts";
+@import "./tradingUser.scss";

@@ -1,28 +1,22 @@
 import { loadingCheck } from "./loadingReducer";
 import { showError } from "./msgboxReducer";
-import { db } from '../firebase/firebase-config';
-
-
+import { db } from "../firebase/firebase-config";
 
 const urlApi = "https://api.coingecko.com/api/v3/coins";
 
 //https://api.binance.com
 
-
 const initialState = {
   marketCoins: [],
   selectCoinID: "",
-  priceCoin: []
-}
+  priceCoin: [],
+};
 
 const types = {
   setMarketCoins: "[Trading] SetMarketCoins",
   setSelectedCoin: "[Trading] SetSelectedCoin",
   getPricesCoin: "[Trading] GetPricesCoin",
 };
-
-
-
 
 //REDUCERS
 export const tradingReducer = (state = initialState, action) => {
@@ -36,30 +30,26 @@ export const tradingReducer = (state = initialState, action) => {
     case types.setSelectedCoin:
       return {
         ...state,
-        selectCoinID: action.payload.selectCoinID
+        selectCoinID: action.payload.selectCoinID,
       };
 
     case types.getPricesCoin:
       return {
         ...state,
-        priceCoin: action.payload.priceCoin
+        priceCoin: action.payload.priceCoin,
       };
     default:
       return state;
   }
 };
 
-
-
-
-
-
-
 //ACTIONS
 export const coinsMarketsAPI = () => {
   return async (dispatch) => {
     dispatch(loadingCheck(true));
-    await fetch(`${urlApi}/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
+    await fetch(
+      `${urlApi}/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch(
@@ -83,54 +73,42 @@ export const coinsMarketsAPI = () => {
   };
 };
 
-
-
 export const setMarketCoins = (marketCoins) => {
   return {
     type: types.setMarketCoins,
     payload: {
-      marketCoins
-    }
+      marketCoins,
+    },
   };
 };
-
-
-
 
 export const setSelectedCoinId = (selectCoinID) => {
   return {
     type: types.setSelectedCoin,
     payload: {
-      selectCoinID
-    }
+      selectCoinID,
+    },
   };
 };
 
-
-
-
-
 export const infoCoinMarketPrice = (day) => {
   return async (dispatch, getState) => {
-    console.log(`${urlApi}/${getState().trading.selectCoinID}/market_chart?vs_currency=USD&days=${day}`);
-    await fetch(`${urlApi}/${getState().trading.selectCoinID}/market_chart?vs_currency=USD&days=${day}`)
+    await fetch(
+      `${urlApi}/${
+        getState().trading.selectCoinID
+      }/market_chart?vs_currency=USD&days=${day}`
+    )
       .then((response) => response.json())
-      .then((data) => {
+      .then((result) => {
+        let data = { index: [], price: [], volumes: [] };
 
-        // let values = data.prices.slice(data.prices.length - 15);
-        let values = data.prices;
-        let info= [];
+        for (const item of result.prices) {
+          data.index.push(item[0]);
+          data.price.push(item[1]);
+        }
+        for (const item of result.total_volumes) data.volumes.push(item[1]);
 
-
-        values.forEach((element, index) => {          
-          info.push({
-            label: index,
-            x: index,
-            y: element[1]
-          })
-        });
-
-       dispatch(getPriceCoin(info));
+        dispatch(getPriceCoin(data));
       })
       .catch((e) => {
         dispatch(showError("Error", e.message));
@@ -138,13 +116,11 @@ export const infoCoinMarketPrice = (day) => {
   };
 };
 
-
-
 export const getPriceCoin = (priceCoin) => {
   return {
     type: types.getPricesCoin,
     payload: {
-      priceCoin
-    }
+      priceCoin,
+    },
   };
 };
