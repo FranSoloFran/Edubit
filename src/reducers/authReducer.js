@@ -19,7 +19,6 @@ export const authReducer = (state = {}, action) => {
             return {
                 uid: action.payload.uid,
                 name: action.payload.name,
-                money: action.payload.money,
                 documentId: action.payload.documentId
             }
 
@@ -43,7 +42,7 @@ export const loginWithEmail = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(async ({ user }) => {
                 const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
-                dispatch(login(user.uid, docRef[0].information.name, docRef[0].trading.money, docRef[0].id));
+                dispatch(login(user.uid, docRef[0].information.name, docRef[0].id));
                 dispatch(loadingCheck(false));
             })
             .catch(e => {
@@ -78,7 +77,7 @@ export const startRegisterWithEmail = (email, passwod, name) => {
                 await db.collection(`${user.uid}`).add(newUserData);
                 const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
 
-                dispatch(login(user.uid, newUserData.information.name, newUserData.trading.money, docRef[0].id));
+                dispatch(login(user.uid, newUserData.information.name, docRef[0].id));
                 dispatch(loadingCheck(false));
             })
             .catch(e => {
@@ -95,7 +94,7 @@ export const startGoogleLogin = () => {
     return (dispatch) => {
         dispatch(loadingCheck(true));
         firebase.auth().signInWithPopup(googleAuthProvider)
-            .then(async({ user }) => {
+            .then(async ({ user }) => {
 
                 const newUserData = {
                     information: {
@@ -111,7 +110,7 @@ export const startGoogleLogin = () => {
                 await db.collection(`${user.uid}`).add(newUserData);
                 const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
                 console.log(docRef);
-                dispatch(login(user.uid, newUserData.information.name, newUserData.trading.money, docRef[0].id));
+                dispatch(login(user.uid, newUserData.information.name, docRef[0].id));
                 dispatch(loadingCheck(false));
             })
             .catch(e => {
@@ -132,22 +131,26 @@ export const startLogout = () => {
 
 
 
+export const setLogin = (uid, name, documentId) => {
+    return (dispatch) => {
+        dispatch(login(uid, name, documentId));
+    }
+}
 
 
-export const login = (uid, name, money, documentId) => {
+const login = (uid, name, documentId) => {
     return {
         type: types.login,
         payload: {
             uid,
             name,
-            money,
             documentId
         }
     }
 }
 
 
-export const logout = () => {
+const logout = () => {
     return {
         type: types.logout,
     }

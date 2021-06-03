@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 
 import { firebase, db } from "../firebase/firebase-config";
-import { login } from "../reducers/authReducer";
+import { setLogin } from "../reducers/authReducer";
 import { loadingCheck } from "../reducers/loadingReducer";
 import { returnDocuments } from '../helper/returnDocuments';
 
@@ -27,7 +27,7 @@ export const AppRoutes = () => {
         firebase.auth().onAuthStateChanged(async(user) => {
             if (user?.uid) {
                 const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
-                dispatch(login(user.uid, docRef[0].information.name, docRef[0].trading.money, docRef[0].id));
+                dispatch(setLogin(user.uid, docRef[0].information.name, docRef[0].id));
                 setIsLoggedIn(true);
             }
             else {
