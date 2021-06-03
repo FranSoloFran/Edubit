@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-  coinsMarketsAPI, 
-  infoCoinMarketPrice, 
-  setSelectedCoinId
+  coinsMarketsAPI,
+  infoCoinMarketPrice,
+  selectCoin
 } from "../../../reducers/tradingReducer";
-
 
 
 export const TradingCoins = () => {
@@ -14,17 +13,20 @@ export const TradingCoins = () => {
 
   const listCoins = useSelector((state) => state.trading.marketCoins);
   const [coinselect, setCoinSelect] = useState("");
+ 
+
 
   useEffect(() => {
-    dispatch(coinsMarketsAPI());
+    dispatch(coinsMarketsAPI());  
   }, [dispatch]);
 
 
-  const handleClickCoin = (id) =>{
-    setCoinSelect(id) ;
-    dispatch(setSelectedCoinId(id));
+  const handleClickCoin = (id) => {
+    setCoinSelect(id);
+    dispatch(selectCoin(id));
     dispatch(infoCoinMarketPrice(1));
   }
+
 
 
   return (

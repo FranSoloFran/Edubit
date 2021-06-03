@@ -27,7 +27,6 @@ export const TradingMarket = () => {
 
     useEffect(() => {        
         setData(priceCoin);
-        console.log(data);
     }, [priceCoin]) 
 
 

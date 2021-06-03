@@ -1,24 +1,34 @@
 import { loadingCheck } from "./loadingReducer";
 import { showError } from "./msgboxReducer";
 import { db } from '../firebase/firebase-config';
+import { returnDocuments } from '../helper/returnDocuments';
+import { calculateBidAsk } from "../helper/calculateBidAsk";
 
 
+const urlApi = "https://api.coingecko.com/api/v3";
 
-const urlApi = "https://api.coingecko.com/api/v3/coins";
-
-//https://api.binance.com
 
 
 const initialState = {
+  money: 0,
   marketCoins: [],
   selectCoinID: "",
-  priceCoin: []
+  priceCoin: [],
+  pricesBidAsk: [],
+  coinHistory: [],
+  coinPortafolio: [],
+  showFormBuy: false,
+  showFormSold: false
 }
+
 
 const types = {
   setMarketCoins: "[Trading] SetMarketCoins",
   setSelectedCoin: "[Trading] SetSelectedCoin",
   getPricesCoin: "[Trading] GetPricesCoin",
+  getPricePricBidAsk: "[Trading] GetPricesBidAsk",
+  showFormBuy: "[Trading] ShowFormBuy",
+  showFormSold: "[Trading] ShowFormSold",
 };
 
 
@@ -30,6 +40,7 @@ export const tradingReducer = (state = initialState, action) => {
     case types.setMarketCoins:
       return {
         ...state,
+        money: action.payload.money,
         marketCoins: action.payload.marketCoins,
       };
 
@@ -44,6 +55,30 @@ export const tradingReducer = (state = initialState, action) => {
         ...state,
         priceCoin: action.payload.priceCoin
       };
+
+    case types.getPricePricBidAsk:
+      return {
+        ...state,
+        pricesBidAsk: action.payload.priceBidAsk
+      };
+
+
+
+    case types.showFormBuy:
+      return {
+        ...state,
+        showFormBuy: action.payload.show
+      };
+
+
+    case types.showFormSold:
+      return {
+        ...state,
+        showFormSold: action.payload.show
+      };
+
+
+
     default:
       return state;
   }
@@ -56,7 +91,7 @@ export const tradingReducer = (state = initialState, action) => {
 
 
 //ACTIONS
-export const coinsMarketsAPI = () => {
+/* export const coinsMarketsAPI = () => {
   return async (dispatch) => {
     dispatch(loadingCheck(true));
     await fetch(`${urlApi}/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true`)
@@ -81,15 +116,46 @@ export const coinsMarketsAPI = () => {
         dispatch(showError("Error", e.message));
       });
   };
+}; */
+
+
+
+
+//OBTENER 5 MONEDAS DEFINIDAS POR ID
+export const coinsMarketsAPI = () => {
+  return async (dispatch, getState) => {
+    dispatch(loadingCheck(true));
+    await fetch(`${urlApi}/coins/markets?vs_currency=USD&ids=bitcoin%2Cethereum%2Ctether%2Cbinancecoin%2Cdogecoin&order=market_cap_desc&sparkline=false`)
+      .then((response) => response.json())
+      .then(async (data) => {
+
+        const docRef = await db.collection(`${getState().auth.uid}`).get().then(snap => returnDocuments(snap));
+        let info = [];
+        data.forEach(element => {
+          info.push({
+            id: element.id,
+            name: element.name,
+            image: element.image
+          })
+        });
+
+        dispatch(setMarketCoins(info, docRef[0].trading.money));
+        dispatch(loadingCheck(false));
+      })
+      .catch((e) => {
+        dispatch(loadingCheck(false));
+        dispatch(showError("Error", e.message));
+      });
+  };
 };
 
 
-
-export const setMarketCoins = (marketCoins) => {
+const setMarketCoins = (marketCoins, money) => {
   return {
     type: types.setMarketCoins,
     payload: {
-      marketCoins
+      marketCoins,
+      money
     }
   };
 };
@@ -97,7 +163,15 @@ export const setMarketCoins = (marketCoins) => {
 
 
 
-export const setSelectedCoinId = (selectCoinID) => {
+//ENVIA EL ID DE LA MONEDA SELECCIONADA
+export const selectCoin = (selectCoinID) => {
+  return (dispatch) => {
+    dispatch(setSelectedCoinId(selectCoinID));
+  }
+}
+
+
+const setSelectedCoinId = (selectCoinID) => {
   return {
     type: types.setSelectedCoin,
     payload: {
@@ -109,20 +183,17 @@ export const setSelectedCoinId = (selectCoinID) => {
 
 
 
-
+//OBTENER INFORMACION DE UNA MONEDA EN PARTICULAR PARA EL GRÁFICO
 export const infoCoinMarketPrice = (day) => {
   return async (dispatch, getState) => {
-    console.log(`${urlApi}/${getState().trading.selectCoinID}/market_chart?vs_currency=USD&days=${day}`);
-    await fetch(`${urlApi}/${getState().trading.selectCoinID}/market_chart?vs_currency=USD&days=${day}`)
+    await fetch(`${urlApi}/coins/${getState().trading.selectCoinID}/market_chart?vs_currency=USD&days=${day}`)
       .then((response) => response.json())
       .then((data) => {
 
-        // let values = data.prices.slice(data.prices.length - 15);
         let values = data.prices;
-        let info= [];
+        let info = [];
 
-
-        values.forEach((element, index) => {          
+        values.forEach((element, index) => {
           info.push({
             label: index,
             x: index,
@@ -130,7 +201,7 @@ export const infoCoinMarketPrice = (day) => {
           })
         });
 
-       dispatch(getPriceCoin(info));
+        dispatch(getPriceCoin(info));
       })
       .catch((e) => {
         dispatch(showError("Error", e.message));
@@ -140,11 +211,119 @@ export const infoCoinMarketPrice = (day) => {
 
 
 
-export const getPriceCoin = (priceCoin) => {
+const getPriceCoin = (priceCoin) => {
   return {
     type: types.getPricesCoin,
     payload: {
       priceCoin
+    }
+  };
+};
+
+
+
+
+
+
+//OBTENER PRECIO DE COMPRA DE LA MONEDA SELECCIONADA
+export const getPriceBidAsk = (idCoin, grafico) => {
+  return async (dispatch) => {
+
+    await fetch(`${urlApi}/simple/price?ids=${idCoin}&vs_currencies=usd`)
+      .then((response) => response.json())
+      .then((data) => {
+        let price = calculateBidAsk(data[idCoin].usd);
+
+        if (grafico === true) {
+          dispatch(getBidAsk(price));
+        }
+      })
+      .catch((e) => {
+        dispatch(showError("Error", e.message));
+      });
+  }
+}
+
+
+const getBidAsk = (priceBidAsk) => {
+  return {
+    type: types.getPricePricBidAsk,
+    payload: {
+      priceBidAsk
+    }
+  };
+};
+
+
+
+
+
+
+
+///MUESTRA Y OCULTA EL FORMULARIO DE COMPRA
+export const formBuySHowDisp = () => {
+  return (dispatch) => {
+    dispatch(formBuySHow(true));
+  }
+}
+
+export const hideBuySHowDisp = () => {
+  return (dispatch) => {
+    dispatch(hideBuySHow(false));
+  }
+}
+
+
+const formBuySHow = (show) => {
+  return {
+    type: types.showFormBuy,
+    payload: {
+      show
+    }
+  };
+};
+
+const hideBuySHow = (show) => {
+  return {
+    type: types.showFormBuy,
+    payload: {
+      show
+    }
+  };
+};
+
+
+
+
+
+///MUESTRA Y OCULTA EL FORMULARIO DE VENTA
+export const formSoldSHowDisp = () => {
+  return (dispatch) => {
+    dispatch(formSoldSHow(true));
+  }
+}
+
+export const hideSoldSHowDisp = () => {
+  return (dispatch) => {
+    dispatch(hideSoldSHow(false));
+  }
+}
+
+
+const formSoldSHow = (show) => {
+  return {
+    type: types.showFormSold,
+    payload: {
+      show
+    }
+  };
+};
+
+const hideSoldSHow = (show) => {
+  return {
+    type: types.showFormSold,
+    payload: {
+      show
     }
   };
 };
