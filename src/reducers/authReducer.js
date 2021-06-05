@@ -69,7 +69,7 @@ export const startRegisterWithEmail = (email, passwod, name) => {
                 }
 
                 const newTrading = {
-                    money: 10000.00
+                    money: 50000.00
                 }
 
                 await db.collection(`${user.uid}`).doc("userInfo").set(newUserData);
@@ -93,11 +93,10 @@ export const startGoogleLogin = () => {
         dispatch(loadingCheck(true));
         firebase.auth().signInWithPopup(googleAuthProvider)
             .then(async ({ user }) => {
-
-                await db.collection(`${user.uid}`).doc("userInfo").get().then( async(docs) => {
+                await db.collection(`${user.uid}`).doc("userInfo").get().then(async (docs) => {
                     if (docs.exists) {
                         dispatch(login(user.uid, user.displayName));
-                    } 
+                    }
                     else {
                         const newUserData = {
                             name: user.displayName,
@@ -105,17 +104,19 @@ export const startGoogleLogin = () => {
                             sexo: "",
                             edad: ""
                         }
-        
+
                         const newTrading = {
                             money: 50000.00
                         }
-        
+
+
                         await db.collection(`${user.uid}`).doc("userInfo").set(newUserData);
                         await db.collection(`${user.uid}`).doc("trading").set(newTrading);
+
                         dispatch(login(user.uid, user.displayName));
                     }
                 });
-              
+
                 dispatch(loadingCheck(false));
             })
             .catch(e => {

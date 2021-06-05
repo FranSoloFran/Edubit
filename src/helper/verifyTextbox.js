@@ -56,5 +56,12 @@ export const isNumber = (text) => {
 
 
 export const formatToCurrency = (amount) => {
-    return (parseFloat(amount)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');    
+    return (parseFloat(amount)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+
+export const convertDate = (timestamp ) => {  
+    const d = new Date(timestamp); 
+    const formattedTime = d.toUTCString(timestamp);
+    return formattedTime;
 }

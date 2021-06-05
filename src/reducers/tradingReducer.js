@@ -501,7 +501,7 @@ export const getHistory = () => {
         querySnapshot.forEach((doc) => {
           array.push(doc.data())
         });
-      })
+      });      
     dispatch(historyCoin(array));
     dispatch(loadingCheck(false));
   }

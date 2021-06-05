@@ -22,17 +22,23 @@ export const AppRoutes = () => {
 
 
     useEffect(() => {
-      dispatch(loadingCheck(true));
-        firebase.auth().onAuthStateChanged(async(user) => {
+        dispatch(loadingCheck(true));
+        firebase.auth().onAuthStateChanged(async (user) => {
             if (user?.uid) {
-                const docRef = await db.collection(`${user.uid}`).doc('userInfo').get().then((docs) => docs.data());
-                dispatch(setLogin(user.uid, docRef.name));
+               await db.collection(`${user.uid}`).doc('userInfo').get().then(async (docs) => {
+                    if (docs.exists) {
+                        dispatch(setLogin(user.uid, docs.data().name, "authroute"));
+                    }
+                    else {
+                        setIsLoggedIn(false);
+                    }
+                })
                 setIsLoggedIn(true);
             }
             else {
                 setIsLoggedIn(false);
             }
-        }); 
+        });
         dispatch(loadingCheck(false));
     }, [dispatch, setIsLoggedIn]);
 

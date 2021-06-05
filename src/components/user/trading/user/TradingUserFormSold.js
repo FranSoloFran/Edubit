@@ -29,7 +29,7 @@ export const TradingUserFormSold = () => {
             setCantidadRestante(cant.cantidad);
             setPlata(money);
         }
-    }, [form, money])
+    }, [form, money, portafolio])
 
 
     const handleChange = (e) => {
