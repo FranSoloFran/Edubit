@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { firebase, db } from "../firebase/firebase-config";
 import { setLogin } from "../reducers/authReducer";
 import { loadingCheck } from "../reducers/loadingReducer";
-import { returnDocuments } from '../helper/returnDocuments';
 
 
 //CUSTOM ROUTES
@@ -23,17 +22,17 @@ export const AppRoutes = () => {
 
 
     useEffect(() => {
-        dispatch(loadingCheck(true));
+      dispatch(loadingCheck(true));
         firebase.auth().onAuthStateChanged(async(user) => {
             if (user?.uid) {
-                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
-                dispatch(setLogin(user.uid, docRef[0].information.name, docRef[0].id));
+                const docRef = await db.collection(`${user.uid}`).doc('userInfo').get().then((docs) => docs.data());
+                dispatch(setLogin(user.uid, docRef.name));
                 setIsLoggedIn(true);
             }
             else {
                 setIsLoggedIn(false);
             }
-        });
+        }); 
         dispatch(loadingCheck(false));
     }, [dispatch, setIsLoggedIn]);
 

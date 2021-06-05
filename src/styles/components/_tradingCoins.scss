@@ -8,11 +8,12 @@
 
 .trading__coins-title {
   padding: 0.2rem;
+  margin-top: 20px;
 }
 
 .trading__coins-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .trading__coins-group {

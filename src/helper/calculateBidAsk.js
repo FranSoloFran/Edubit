@@ -10,7 +10,9 @@ export const calculateBidAsk = (money) => {
     let min = (money - (money * 0.2) / 100); //obtiene los mínimos de compra
     let max = (money + (money * 0.2) / 100); //obtiene los máximos de venta
 
-    let val = 0
+    bid.push(parseFloat((Math.random() * (max - money + 1) + money).toFixed(4)));
+    ask.push(parseFloat((Math.random() * (money - min + 1) + min).toFixed(4)));
+    /* let val = 0
 
     while (val < 4) {
         let number = parseFloat((Math.random() * (max - money + 1) + money).toFixed(4));
@@ -28,7 +30,7 @@ export const calculateBidAsk = (money) => {
             ask.push(number);
             val++
         } 
-    }
+    }  */
 
     data.push({
         compra: bid.sort().reverse(),

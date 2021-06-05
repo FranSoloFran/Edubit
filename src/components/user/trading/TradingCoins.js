@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { TradingBooks } from "./TradingBooks";
 import {
   coinsMarketsAPI,
   infoCoinMarketPrice, 
-  selectCoin
+  selectCoin,
+  selectCoinDay
 } from "../../../reducers/tradingReducer";
+
 
 
 export const TradingCoins = () => {
@@ -26,7 +28,7 @@ export const TradingCoins = () => {
   const [filterSelect, setFilterSelect] = useState(listFilters[0]);
  
   useEffect(() => {
-    dispatch(coinsMarketsAPI());  
+    dispatch(coinsMarketsAPI()); 
   }, [dispatch]);
 
    const handleClickCoin = (id) => {
@@ -37,13 +39,15 @@ export const TradingCoins = () => {
 
   const handleClickFilter = (days) => {
     setFilterSelect(days);
+    dispatch(selectCoinDay(days));
     if (coinselect && days) dispatch(infoCoinMarketPrice(days));
   };
 
   if (!coinselect && listCoins && listCoins.length > 0) {
     setCoinSelect(listCoins[0].id);
     setFilterSelect(listFilters[0].days);
-    dispatch(setSelectedCoinId(listCoins[0].id));
+    dispatch(selectCoinDay(listFilters[0].days));
+    dispatch(selectCoin(listCoins[0].id));
     dispatch(infoCoinMarketPrice(listFilters[0].days));
   }
 
@@ -93,6 +97,9 @@ export const TradingCoins = () => {
             ))}
           </div>
         )}
+        {(coinselect!=="")
+        ?<TradingBooks />
+        :<></>}
       </section>
     </div>
   );

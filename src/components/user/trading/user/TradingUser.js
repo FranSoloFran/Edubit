@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getPriceBidAsk } from '../../../../reducers/tradingReducer';
 import {TradingUserMoney} from './TradingUserMoney';
 import { formBuySHowDisp } from '../../../../reducers/tradingReducer';
+import { TradingUserPortafolio } from './TradingUserPortafolio';
 
 
 export const TradingUser = () => {
@@ -28,72 +28,10 @@ export const TradingUser = () => {
 
             <section className="trading__user-menu-container-table">
                 <p className="trading__user-menu-table-title">Portafolios</p>
-                {/* <ul className="trading__user-menu-table">
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="" />
-                            <span>Bitcoin</span>
-                            <span>222.32</span>
-                            <button>ver</button> 
-                        </section>                       
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880" alt="" />
-                            <span>Ethereum</span>
-                            <span>150.00</span>
-                            <button>ver</button> 
-                        </section>                     
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707" alt="" />
-                            <span>Tether</span>
-                            <span>40.11</span>
-                            <button>ver</button> 
-                        </section>                       
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" alt="" />
-                            <span>Binance Coin</span>
-                            <span>1012.20</span>
-                            <button>ver</button> 
-                        </section>                       
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" alt="" />
-                            <span>Binance Coin</span>
-                            <span>1012.20</span>
-                            <button>ver</button> 
-                        </section>                        
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" alt="" />
-                            <span>Binance Coin</span>
-                            <span>1012.20</span>
-                            <button>ver</button> 
-                        </section>                       
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row ">
-                            <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" alt="" />
-                            <span>Binance Coin</span>
-                            <span>1012.20</span>
-                            <button>ver</button> 
-                        </section>                      
-                    </li>
-                    <li>
-                        <section className="trading__user-menu-table-row">
-                            <img src="https://assets.coingecko.com/coins/images/825/large/binance-coin-logo.png?1547034615" alt="" />
-                            <span>Binance Coin</span>
-                            <span>1012.20</span>
-                            <button>ver</button> 
-                        </section>                        
-                    </li>
-                </ul> */}
+
+                <ul className="trading__user-menu-table">
+                    <TradingUserPortafolio />
+                </ul>                
             </section>           
         </aside>
     )

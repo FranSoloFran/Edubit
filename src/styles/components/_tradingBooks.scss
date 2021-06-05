@@ -3,23 +3,17 @@
 .trading_books{
     background-color: lighten($color: $dark-grey, $amount: 75);  
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    min-width: 500px;
-    width: 80%;
+    flex-direction: row;      
 }
 
-.trading__books-sold, .trading__books-buy{
+.trading__books-sold-buy{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     font-size: 15px;
-    justify-content: space-around;
     margin-left: 10px;    
 }
 
-.trading__books-sold{
-    color: red ;
-} 
-.trading__books-buy{
-    color: green;
+.trading__books-sold-buy p{
+    margin-right: 30px;
 }

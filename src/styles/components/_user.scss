@@ -114,7 +114,8 @@
     padding-left: 10px;
     padding-right: 10px;
     position: fixed;
-    width: 350px;    
+    width: 350px; 
+    z-index: 800;   
 }
 
 .user__sidebar-navbar {

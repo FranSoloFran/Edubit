@@ -2,7 +2,6 @@
 import { firebase, googleAuthProvider, db } from '../firebase/firebase-config';
 import { loadingCheck } from './loadingReducer';
 import { showError } from './msgboxReducer';
-import { returnDocuments } from '../helper/returnDocuments';
 
 const types = {
     login: '[Auth] Login',
@@ -18,8 +17,7 @@ export const authReducer = (state = {}, action) => {
         case types.login:
             return {
                 uid: action.payload.uid,
-                name: action.payload.name,
-                documentId: action.payload.documentId
+                name: action.payload.name
             }
 
         case types.logout:
@@ -41,8 +39,8 @@ export const loginWithEmail = (email, password) => {
         dispatch(loadingCheck(true));
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(async ({ user }) => {
-                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
-                dispatch(login(user.uid, docRef[0].information.name, docRef[0].id));
+                const docRef = await db.collection(`${user.uid}`).doc("userInfo").get().then((docs) => docs.data());
+                dispatch(login(user.uid, docRef.name));
                 dispatch(loadingCheck(false));
             })
             .catch(e => {
@@ -64,20 +62,20 @@ export const startRegisterWithEmail = (email, passwod, name) => {
             .then(async ({ user }) => {
 
                 const newUserData = {
-                    information: {
-                        name: name,
-                        email: email,
-                        sexo: "",
-                        edad: ""
-                    },
-                    trading: {
-                        money: 10000.00
-                    }
+                    name: name,
+                    email: email,
+                    sexo: "",
+                    edad: ""
                 }
-                await db.collection(`${user.uid}`).add(newUserData);
-                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
 
-                dispatch(login(user.uid, newUserData.information.name, docRef[0].id));
+                const newTrading = {
+                    money: 10000.00
+                }
+
+                await db.collection(`${user.uid}`).doc("userInfo").set(newUserData);
+                await db.collection(`${user.uid}`).doc("trading").set(newTrading);
+                const docRef = await db.collection(`${user.uid}`).doc("userInfo").get().then((docs) => docs.data());
+                dispatch(login(user.uid, docRef.name));
                 dispatch(loadingCheck(false));
             })
             .catch(e => {
@@ -96,21 +94,28 @@ export const startGoogleLogin = () => {
         firebase.auth().signInWithPopup(googleAuthProvider)
             .then(async ({ user }) => {
 
-                const newUserData = {
-                    information: {
-                        name: user.displayName,
-                        email: user.email,
-                        sexo: "",
-                        edad: ""
-                    },
-                    trading: {
-                        money: 10000.00
+                await db.collection(`${user.uid}`).doc("userInfo").get().then( async(docs) => {
+                    if (docs.exists) {
+                        dispatch(login(user.uid, user.displayName));
+                    } 
+                    else {
+                        const newUserData = {
+                            name: user.displayName,
+                            email: user.email,
+                            sexo: "",
+                            edad: ""
+                        }
+        
+                        const newTrading = {
+                            money: 50000.00
+                        }
+        
+                        await db.collection(`${user.uid}`).doc("userInfo").set(newUserData);
+                        await db.collection(`${user.uid}`).doc("trading").set(newTrading);
+                        dispatch(login(user.uid, user.displayName));
                     }
-                }
-                await db.collection(`${user.uid}`).add(newUserData);
-                const docRef = await db.collection(`${user.uid}`).get().then(snap => returnDocuments(snap));
-                console.log(docRef);
-                dispatch(login(user.uid, newUserData.information.name, docRef[0].id));
+                });
+              
                 dispatch(loadingCheck(false));
             })
             .catch(e => {
@@ -131,20 +136,19 @@ export const startLogout = () => {
 
 
 
-export const setLogin = (uid, name, documentId) => {
+export const setLogin = (uid, name) => {
     return (dispatch) => {
-        dispatch(login(uid, name, documentId));
+        dispatch(login(uid, name));
     }
 }
 
 
-const login = (uid, name, documentId) => {
+const login = (uid, name) => {
     return {
         type: types.login,
         payload: {
             uid,
-            name,
-            documentId
+            name
         }
     }
 }

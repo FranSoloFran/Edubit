@@ -1,9 +1,9 @@
 import React from 'react';
-import { TradingBooks } from './TradingBooks';
 import { TradingCoins } from './TradingCoins';
 import { TradingMarket } from './TradingMarket';
 import { TradingUser } from './user/TradingUser';
-import { TradingUserForm } from './user/TradingUserForm';
+import { TradingUserFormBuy } from './user/TradingUserFormBuy';
+import { TradingUserFormSold } from './user/TradingUserFormSold';
 
 
 export const TradingScreen = () => {
@@ -13,15 +13,14 @@ export const TradingScreen = () => {
         <div className="trading__screen">
             <section className="trading__info">
                 <TradingCoins />
-                <TradingMarket />
-                <TradingBooks />
+                <TradingMarket />                
             </section>
-
-            <TradingUserForm />
-
             <section className="trading__user">
                 <TradingUser />
             </section>
+            
+            <TradingUserFormBuy />
+            <TradingUserFormSold />
         </div>
     )
 }

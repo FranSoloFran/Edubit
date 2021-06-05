@@ -18,6 +18,7 @@
     color: white;
     margin: auto;
     width: 90%;
+    z-index: 500;
 }
 
 
@@ -35,6 +36,7 @@
 
 .trading__user-menu-container-table{   
     display: block;
+    height: 600px;
     margin: auto;
     margin-top: 60px;
     overflow-y: scroll;
