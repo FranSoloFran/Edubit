@@ -32,7 +32,8 @@ const types = {
   showFormBuy: "[Trading] ShowFormBuy",
   showFormSold: "[Trading] ShowFormSold",
   getPricePricSold: "[Trading] getPricePricSold",
-  setPortafolio: "[Trading] setPortafolio"
+  setPortafolio: "[Trading] setPortafolio",
+  getHistoryUser: "[Trading] GetHistoryCoin",
 };
 
 
@@ -105,6 +106,13 @@ export const tradingReducer = (state = initialState, action) => {
       return {
         ...state,
         pricePriceSold: action.payload.pricePriceSold
+      };
+
+
+    case types.getHistoryUser:
+      return {
+        ...state,
+        coinHistory: action.payload.coinHistory
       };
 
 
@@ -481,27 +489,34 @@ export const getPortafolio = () => {
 
 
 
-///OBTIENE EL PRECIO DE VENTA
-/* export const getPortafolio = () => {
+///OBTIENE EL PORTAFOLIO DE LAS PERSONAS
+export const getHistory = () => {
   return async (dispatch, getState) => {
 
-    let array=[];
+    let array = [];
     await db.collection(`${getState().auth.uid}`)
       .doc('trading')
-      .collection('portafolio')
+      .collection('history')
       .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           array.push(doc.data())
         });
       })
-    dispatch(buyCriptomoneda(array));
+    dispatch(historyCoin(array));
     dispatch(loadingCheck(false));
   }
-} */
+}
 
 
 
-
+const historyCoin = (coinHistory) => {
+  return {
+    type: types.getHistoryUser,
+    payload: {
+      coinHistory
+    }
+  };
+}
 
 
 

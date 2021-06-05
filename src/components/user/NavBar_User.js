@@ -68,17 +68,11 @@ export const NavBarUser = () => {
                     Simulaciones
                   </label>
 
-                  <ul>
+                  <ul>                    
                     <li>
-                      <Link to="/landingpage">
-                        <span className="icon-coin-dollar"></span>
-                        Portafolio
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/landingpage">
+                      <Link to="/landingpage/history">
                         <span className="icon-hour-glass"></span>
-                        Transacciones
+                        Historia
                       </Link>
                     </li>
                     <li>
