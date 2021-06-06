@@ -1,5 +1,4 @@
 import React from "react";
-import React from "react";
 // import Plot from "react-plotly.js";
 
 import Plotly from "../../helper/plotlySmall";
