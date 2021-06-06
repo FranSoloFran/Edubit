@@ -1,5 +1,10 @@
 import React from "react";
-import Plot from "react-plotly.js";
+import React from "react";
+// import Plot from "react-plotly.js";
+
+import Plotly from "../../helper/plotlySmall";
+import createPlotlyComponent from "react-plotly.js/factory";
+const Plot = createPlotlyComponent(Plotly);
 
 export function LineChart({ index, price, volumes }) {
   let data = {
