@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
+
+.cursos__container {
+	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
+
+	max-height: 100%;
+}
+
+.cursos__button_inscribir {
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	margin: auto;
+	margin-top: 10px;
+	margin-left: 80px;
+	padding: 8px 10px 8px 10px;
+	width: 250px;
+	background-color: #02b902;
+	transition: color .3s ease;
+
+	&:focus {
+		outline: none
+	}
+
+	&:hover {
+		color: darken($color: white, $amount: 20);
+	}
+}
+
+.cursos__container_title {
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	margin: auto;
+	margin-top: 70px;
+	margin-left: 160px;
+	max-width: 1300px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+//BODY DEL cursos
+.cursos__container_item {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	margin-top: 70px;
+	max-width: 1300px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+//Contiene el titulo, subtitulo y parrafo
+.cursos__text_item {
+	margin: auto;
+	max-width: 600px;
+	padding-bottom: 30px;
+	width: 100%;
+}
+
+.cursos__title_item {
+	display: block;
+	font-size: 40px;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.home__paragraph_item {
+	display: block;
+	font-size: 28px;
+	margin-top: 30px;
+	text-align: center;
+}

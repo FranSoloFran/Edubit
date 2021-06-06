@@ -6,6 +6,7 @@ import { startLogout } from "../../reducers/authReducer";
 export const NavBarUser = () => {
   const dispatch = useDispatch();
   const [classA, setClassA] = useState("circle-right");
+  const [classB, setClassB] = useState("circle-right");
   const [check, setChecked] = useState("");
 
   //Oculta el menú
@@ -13,6 +14,7 @@ export const NavBarUser = () => {
   const buttonHandler = () => {
     setIsLoading((isLoading) => !isLoading);
     setClassA("circle-right");
+    setClassB("circle-right");
     if (check === "" ? setChecked("open") : setChecked(""));
   };
 
@@ -22,11 +24,20 @@ export const NavBarUser = () => {
   };
 
   //Cambia el ícono de simulaciones
-  const handleChecked = () => {
+  const handleCheckedA = () => {
     if (
       classA === "circle-right"
         ? setClassA("circle-down")
         : setClassA("circle-right")
+    );
+  };
+
+  //Cambia el ícono de multimedia
+  const handleCheckedB = () => {
+    if (
+      classB === "circle-right"
+        ? setClassB("circle-down")
+        : setClassB("circle-right")
     );
   };
 
@@ -62,13 +73,13 @@ export const NavBarUser = () => {
               </li>
               <li className="user__sidebar-li">
                 <div className="user__submenu-item">
-                  <input type="checkbox" id="A" onChange={handleChecked} />
+                  <input type="checkbox" id="A" onChange={handleCheckedA} />
                   <label htmlFor="A">
                     <span className={`icon-${classA}`}></span>
                     Simulaciones
                   </label>
 
-                  <ul>                    
+                  <ul>
                     <li>
                       <Link to="/landingpage/history">
                         <span className="icon-hour-glass"></span>
@@ -85,10 +96,39 @@ export const NavBarUser = () => {
                 </div>
               </li>
               <li className="user__sidebar-li">
-                <Link to="/landingpage">
-                  <span className="icon-play"></span>
-                  Videos
-                </Link>
+                <div className="user__submenu-item">
+                  <input type="checkbox" id="B" onChange={handleCheckedB} />
+                  <label htmlFor="B">
+                    <span className={`icon-${classB}`}></span>
+                    Cursos
+                  </label>
+                  <ul>
+                    <li>
+                      <Link to="/landingpage/cursoBasico">
+                        <span className="icon-play"></span>
+                        Basico
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/landingpage/cursoIntermedio1">
+                        <span className="icon-play"></span>
+                        Intermedio - 1
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/landingpage/cursoIntermedio2">
+                        <span className="icon-play"></span>
+                        Intermedio - 2
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/landingpage/cursoAvanzado">
+                        <span className="icon-play"></span>
+                        Avanzado
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li className="user__sidebar-li" onClick={handleClickLogout}>
                 <Link to="/homepage">

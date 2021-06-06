@@ -1,0 +1,54 @@
+import React from 'react';
+import { Carousel } from '3d-react-carousal';
+
+export const CursoAvanzado = () => {
+
+    let slides = [
+        <iframe width="720" height="460" src="https://www.youtube.com/embed/MX6pqwZ7LHQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>,
+        <iframe width="720" height="460" src="https://www.youtube.com/embed/WRgbtNM6ho8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>,
+        <iframe width="720" height="460" src="https://www.youtube.com/embed/0Osd2sg1Thg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>,
+    ];
+
+    return (
+        <div className="cursos__container">
+            <Carousel slides={slides} autoplay={false} interval={3000} />
+            <div className="cursos__container_title">
+                <h1>Curso Avanzado:</h1>
+                <button className="cursos__button_inscribir">Inscribirme</button>
+            </div>
+            <div className="cursos__container_item">
+                <div className="cursos__text_item">
+                    <h2 className="cursos__title_item f2">¿Cuáles son las estrategias de trading para distintos perfiles de inversión?</h2>
+                    <p className="cursos__paragraph_item f4">
+                        Podemos definir una estrategia de trading como un plan exhaustivo para todas tus operaciones relativas a dicha actividad. Es un marco de referencia que creas como guía para todas tus iniciativas de trading
+                    </p>
+                </div>
+                <div className="cursos__img_item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/MX6pqwZ7LHQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+                </div>
+            </div>
+            <div className="cursos__container_item">
+                <div className="cursos__img_item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/WRgbtNM6ho8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+                </div>
+                <div className="cursos__text_item">
+                    <h2 className="cursos__title_item f2">Acciones vs Criptomonedas</h2>
+                    <p className="cursos__paragraph_item f4">
+                        Un monedero digital o wallet es, en realidad, un software o aplicación donde es posible almacenar, enviar y recibir criptomonedas. Lo cierto es que a diferencia de un monedero de dinero físico, lo que realmente se almacena en los wallets o monederos digitales son las claves que nos dan la propiedad y derecho sobre las criptomonedas, y nos permiten operar con ellas. Dicho de otra forma, basta con conocer las claves para poder transferir las criptomonedas, y la pérdida o robo de las claves puede suponer la pérdida de las criptomonedas, sin posibilidad de recuperarlas.
+                    </p>
+                </div>
+            </div>
+            <div className="cursos__container_item">
+                <div className="cursos__text_item">
+                    <h2 className="cursos__title_item f2">¿Cuáles son algunas técnicas para la compra/venta?</h2>
+                    <p className="cursos__paragraph_item f4">
+                        Cualquier inversor de acciones o en bienes raíces no harán inversiones cuando se les ocurra. Ellos saben que este es un paso riesgoso que no debe dejarse al azar. Antes de invertir en algún negocio es necesario comprender y establecer cuáles son los objetivos de inversión cómo se logrará alcanzarlos.
+                    </p>
+                </div>
+                <div className="cursos__img_item">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/0Osd2sg1Thg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+    )
+}
