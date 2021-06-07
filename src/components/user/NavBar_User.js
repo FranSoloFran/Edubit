@@ -65,12 +65,12 @@ export const NavBarUser = () => {
                   Inicio
                 </Link>
               </li>
-              <li className="user__sidebar-li">
+             {/*  <li className="user__sidebar-li">
                 <Link to="/landingpage">
                   <span className="icon-library"></span>
                   Textos Guiados
                 </Link>
-              </li>
+              </li> */}
               <li className="user__sidebar-li">
                 <div className="user__submenu-item">
                   <input type="checkbox" id="A" onChange={handleCheckedA} />
