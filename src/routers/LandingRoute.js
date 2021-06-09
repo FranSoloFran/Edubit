@@ -10,6 +10,8 @@ import { CursoBasico } from "../components/user/cursos/CursoBasico";
 import { CursoIntermedio1 } from "../components/user/cursos/CursoIntermedio1";
 import { CursoIntermedio2 } from "../components/user/cursos/CursoIntermedio2";
 import { CursoAvanzado } from "../components/user/cursos/CursoAvanzado";
+import { MisCursos } from "../components/user/cursos/MisCursos";
+import { Cursos } from "../components/user/cursos/Cursos";
 
 
 
@@ -29,6 +31,8 @@ export const LandingRoute = () => {
           <Route exact path="/landingpage/cursoIntermedio1" component={CursoIntermedio1} />
           <Route exact path="/landingpage/cursoIntermedio2" component={CursoIntermedio2} />
           <Route exact path="/landingpage/cursoAvanzado" component={CursoAvanzado} />
+          <Route exact path="/landingpage/misCursos" component={MisCursos} />
+          <Route exact path="/landingpage/cursos" component={Cursos} />
           <Redirect to="/landingpage" />
         </Switch>
       </div>

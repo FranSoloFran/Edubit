@@ -1,0 +1,58 @@
+.cursosLista__container_title {
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	margin: auto;
+	margin-top: 70px;
+	margin-left: 160px;
+	max-width: 1300px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.cursosLista__container_cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cursosLista__card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+    width:  40%;
+    margin: 15px;
+
+}
+
+.cursosLista__button_masInfo{
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	margin: auto;
+	padding: 8px 10px 8px 10px;
+	width: 250px;
+	background-color: #02b902;
+	transition: color .3s ease;
+
+	&:focus {
+		outline: none
+	}
+
+	&:hover {
+		color: darken($color: white, $amount: 20);
+	}
+}
+
+
+.cursosLista__container_sinCursos {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}

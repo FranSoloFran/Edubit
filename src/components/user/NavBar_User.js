@@ -65,7 +65,7 @@ export const NavBarUser = () => {
                   Inicio
                 </Link>
               </li>
-             {/*  <li className="user__sidebar-li">
+              {/*  <li className="user__sidebar-li">
                 <Link to="/landingpage">
                   <span className="icon-library"></span>
                   Textos Guiados
@@ -104,6 +104,16 @@ export const NavBarUser = () => {
                   </label>
                   <ul>
                     <li>
+                      <Link to="/landingpage/misCursos">
+                        <span className="icon-play"></span>
+                        Mis Cursos
+                      </Link>
+                      <Link to="/landingpage/cursos">
+                        <span className="icon-play"></span>
+                        Ver Cursos
+                      </Link>
+                    </li>
+                    {/*<li>
                       <Link to="/landingpage/cursoBasico">
                         <span className="icon-play"></span>
                         Basico
@@ -126,7 +136,7 @@ export const NavBarUser = () => {
                         <span className="icon-play"></span>
                         Avanzado
                       </Link>
-                    </li>
+                    </li>*/}
                   </ul>
                 </div>
               </li>

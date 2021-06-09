@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel } from '3d-react-carousal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourses, saveCourseEnroll } from '../../../reducers/coursesReducer';
+import { showOk } from '../../../reducers/msgboxReducer';
+
+
 
 export const CursoBasico = () => {
 
@@ -10,6 +15,34 @@ export const CursoBasico = () => {
         <iframe width="720" height="460" src="https://www.youtube.com/embed/KlzzlQBDBfI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
     ];
 
+    const dispatch = useDispatch();
+    const [enrollButton, setEnrollButton] = useState(true);
+    const userCourses = useSelector(state => state.courses.userCourses);
+    const courseData = {
+        id: '1',
+        name: 'Curso Básico',
+        route: 'CursoBasico'
+    }
+
+    useState(() => {
+        dispatch(getCourses());
+        if (userCourses.find(course => course.id === courseData.id)) {
+            setEnrollButton(false);
+        }
+    }, [userCourses]);
+
+
+    const handleCourseEnroll = () => {
+        dispatch(saveCourseEnroll(courseData));
+        setEnrollButton(!enrollButton);
+        if (!enrollButton) {
+            dispatch(showOk(courseData.name, 'Has abandonado el curso'))
+        }
+        else {
+            dispatch(showOk(courseData.name, 'Te has inscripto al curso'));
+        }
+    }
+
     return (
         <div className="cursos__container">
             <div className="cursos__carousel" >
@@ -17,7 +50,12 @@ export const CursoBasico = () => {
                 <Carousel slides={slides} autoplay={false} interval={3000} />
                 <div className="cursos__container_title">
                     <h1>Curso Basico:</h1>
-                    <button className="cursos__button_inscribir">Inscribirme</button>
+                    {
+                        enrollButton ?
+                            <button className="cursos__button_inscribir" onClick={handleCourseEnroll}>Inscribirme</button>
+                            :
+                            <button className="cursos__button_abandonar" onClick={handleCourseEnroll}>Abandonar</button>
+                    }
                 </div>
                 <div className="cursos__container_item">
                     <div className="cursos__text_item">

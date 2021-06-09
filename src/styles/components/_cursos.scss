@@ -38,6 +38,30 @@ $color-form-highlight: #EEEEEE;
 	}
 }
 
+.cursos__button_abandonar {
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	margin: auto;
+	margin-top: 10px;
+	margin-left: 80px;
+	padding: 8px 10px 8px 10px;
+	width: 250px;
+	background-color: #a14343;
+	transition: color .3s ease;
+
+	&:focus {
+		outline: none
+	}
+
+	&:hover {
+		color: darken($color: white, $amount: 20);
+	}
+}
+
 .cursos__container_title {
 	align-items: center;
 	display: inline-flex;
