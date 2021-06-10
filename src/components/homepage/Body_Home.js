@@ -20,7 +20,7 @@ export const BodyHome = () => {
             En Edubit, estamos comprometidos al aprendizaje dinámico, al
             crecimiento y al desarrollo profesional. Motivamos a nuestros
             alumnos para que hagan preguntas profundas, exploren las fronteras
-            disciplinarias y confronten los pensamientos convencionalees. Le
+            disciplinarias y confronten los pensamientos convencionales. Le
             invitamos a que conozca más sobre Edubit y descrubra así el tipo de
             educación que construimos para usted.
           </p>
@@ -43,7 +43,7 @@ export const BodyHome = () => {
           </h3>
           <p className="home__paragraph_edubit f3">
             Edubit le ofrece un ambiente de aprendizaje enriquecido que ha
-            permitido a un sin número de estudiantes salir adelante. Fundando en
+            permitido a un sin número de estudiantes salir adelante. Fundada en
             el año 2021, nuestra Escuela de negocios está ubicado en CABA,
             Argentina, y es un reflejo de la diversidad de culturas y de
             orígenes de la localidad. Nos sentimos muy orgullosos por nuestro

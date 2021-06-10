@@ -83,7 +83,7 @@ export const NavBarUser = () => {
                     <li>
                       <Link to="/landingpage/history">
                         <span className="icon-hour-glass"></span>
-                        Historia
+                        Historial
                       </Link>
                     </li>
                     <li>
