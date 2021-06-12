@@ -71,7 +71,7 @@ export function LineChart({ index, price, volumes }) {
   return (
     <>
       <h2 style={{ textAlign: "center", padding: "5px" }}>
-        Precio actual: ${" "}
+        Precio actual: $
         {parseFloat(data.price[data.price.length - 1]).toFixed(2)}
       </h2>
       <Plot

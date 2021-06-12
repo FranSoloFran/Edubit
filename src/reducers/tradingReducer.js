@@ -1,11 +1,9 @@
 import { loadingCheck } from "./loadingReducer";
 import { showError } from "./msgboxReducer";
-import { db } from '../firebase/firebase-config';
+import { db } from "../firebase/firebase-config";
 import { calculateBidAsk } from "../helper/calculateBidAsk";
 
-
 const urlApi = "https://api.coingecko.com/api/v3";
-
 
 const initialState = {
   money: 0,
@@ -18,9 +16,8 @@ const initialState = {
   coinHistory: [],
   coinPortafolio: [],
   showFormBuy: false,
-  showFormSold: []
-}
-
+  showFormSold: [],
+};
 
 const types = {
   setMarketCoins: "[Trading] SetMarketCoins",
@@ -35,9 +32,6 @@ const types = {
   setPortafolio: "[Trading] setPortafolio",
   getHistoryUser: "[Trading] GetHistoryCoin",
 };
-
-
-
 
 //REDUCERS
 export const tradingReducer = (state = initialState, action) => {
@@ -76,53 +70,43 @@ export const tradingReducer = (state = initialState, action) => {
     case types.getPricePricBidAsk:
       return {
         ...state,
-        pricesBidAsk: action.payload.priceBidAsk
+        pricesBidAsk: action.payload.priceBidAsk,
       };
-
-
 
     case types.showFormBuy:
       return {
         ...state,
-        showFormBuy: action.payload.show
+        showFormBuy: action.payload.show,
       };
-
 
     case types.showFormSold:
       return {
         ...state,
-        showFormSold: [action.payload.items]
+        showFormSold: [action.payload.items],
       };
-
 
     case types.setPortafolio:
       return {
         ...state,
-        coinPortafolio: action.payload.docs
+        coinPortafolio: action.payload.docs,
       };
-
 
     case types.getPricePricSold:
       return {
         ...state,
-        pricePriceSold: action.payload.pricePriceSold
+        pricePriceSold: action.payload.pricePriceSold,
       };
-
 
     case types.getHistoryUser:
       return {
         ...state,
-        coinHistory: action.payload.coinHistory
+        coinHistory: action.payload.coinHistory,
       };
-
 
     default:
       return state;
   }
 };
-
-
-
 
 //ACTIONS
 
@@ -130,17 +114,23 @@ export const tradingReducer = (state = initialState, action) => {
 export const coinsMarketsAPI = () => {
   return async (dispatch, getState) => {
     dispatch(loadingCheck(true));
-    await fetch(`${urlApi}/coins/markets?vs_currency=USD&ids=bitcoin%2Cethereum%2Ctether%2Cbinancecoin%2Cdogecoin&order=market_cap_desc&sparkline=false`)
+    await fetch(
+      `${urlApi}/coins/markets?vs_currency=USD&ids=bitcoin%2Cethereum%2Ctether%2Cbinancecoin%2Cdogecoin&order=market_cap_desc&sparkline=false`
+    )
       .then((response) => response.json())
       .then(async (data) => {
-        const docRef = await db.collection(`${getState().auth.uid}`).doc('trading').get().then((docs) => docs.data());
+        const docRef = await db
+          .collection(`${getState().auth.uid}`)
+          .doc("trading")
+          .get()
+          .then((docs) => docs.data());
         let info = [];
-        data.forEach(element => {
+        data.forEach((element) => {
           info.push({
             id: element.id,
             name: element.name,
-            image: element.image
-          })
+            image: element.image,
+          });
         });
 
         dispatch(setMarketCoins(info, docRef.money));
@@ -153,28 +143,22 @@ export const coinsMarketsAPI = () => {
   };
 };
 
-
 const setMarketCoins = (marketCoins, money) => {
   return {
     type: types.setMarketCoins,
     payload: {
       marketCoins,
-      money
+      money,
     },
   };
 };
-
-
-
-
 
 //ENVIA EL ID DE LA MONEDA SELECCIONADA
 export const selectCoin = (selectCoinID) => {
   return (dispatch) => {
     dispatch(setSelectedCoinId(selectCoinID));
-  }
-}
-
+  };
+};
 
 const setSelectedCoinId = (selectCoinID) => {
   return {
@@ -185,15 +169,12 @@ const setSelectedCoinId = (selectCoinID) => {
   };
 };
 
-
-
 //ENVIA LA CANTIDAD DE DIAS
 export const selectCoinDay = (day) => {
   return (dispatch) => {
     dispatch(selectCoinDayC(day));
-  }
-}
-
+  };
+};
 
 const selectCoinDayC = (selectCoinDay) => {
   return {
@@ -204,16 +185,12 @@ const selectCoinDayC = (selectCoinDay) => {
   };
 };
 
-
-
-
-
-
 //OBTENER INFORMACION DE UNA MONEDA EN PARTICULAR PARA EL GRÁFICO
 export const infoCoinMarketPrice = (day) => {
   return async (dispatch, getState) => {
     await fetch(
-      `${urlApi}/coins/${getState().trading.selectCoinID
+      `${urlApi}/coins/${
+        getState().trading.selectCoinID
       }/market_chart?vs_currency=USD&days=${day}`
     )
       .then((response) => response.json())
@@ -234,7 +211,6 @@ export const infoCoinMarketPrice = (day) => {
   };
 };
 
-
 const getPriceCoin = (priceCoin) => {
   return {
     type: types.getPricesCoin,
@@ -244,18 +220,9 @@ const getPriceCoin = (priceCoin) => {
   };
 };
 
-
-
-
-
-
-
-
-
 //OBTENER PRECIO DE COMPRA DE LA MONEDA SELECCIONADA
 export const getPriceBidAsk = (idCoin, grafico) => {
   return async (dispatch) => {
-
     await fetch(`${urlApi}/simple/price?ids=${idCoin}&vs_currencies=usd`)
       .then((response) => response.json())
       .then((data) => {
@@ -263,8 +230,7 @@ export const getPriceBidAsk = (idCoin, grafico) => {
 
         if (grafico === true) {
           dispatch(getBidAsk(price));
-        }
-        else {
+        } else {
           dispatch(getPriceSold(price));
           dispatch(formSoldSHowDisp(idCoin, false));
         }
@@ -272,54 +238,46 @@ export const getPriceBidAsk = (idCoin, grafico) => {
       .catch((e) => {
         dispatch(showError("Error", e.message));
       });
-  }
-}
-
+  };
+};
 
 const getBidAsk = (priceBidAsk) => {
   return {
     type: types.getPricePricBidAsk,
     payload: {
-      priceBidAsk
-    }
+      priceBidAsk,
+    },
   };
 };
-
 
 const getPriceSold = (pricePriceSold) => {
   return {
     type: types.getPricePricSold,
     payload: {
-      pricePriceSold
-    }
+      pricePriceSold,
+    },
   };
 };
-
-
-
-
-
 
 ///MUESTRA Y OCULTA EL FORMULARIO DE COMPRA
 export const formBuySHowDisp = () => {
   return (dispatch) => {
     dispatch(formBuySHow(true));
-  }
-}
+  };
+};
 
 export const hideBuySHowDisp = () => {
   return (dispatch) => {
     dispatch(hideBuySHow(false));
-  }
-}
-
+  };
+};
 
 const formBuySHow = (show) => {
   return {
     type: types.showFormBuy,
     payload: {
-      show
-    }
+      show,
+    },
   };
 };
 
@@ -327,28 +285,23 @@ const hideBuySHow = (show) => {
   return {
     type: types.showFormBuy,
     payload: {
-      show
-    }
+      show,
+    },
   };
 };
-
-
-
-
 
 ///MUESTRA Y OCULTA EL FORMULARIO DE VENTA
 export const formSoldSHowDisp = (coindid) => {
   return (dispatch) => {
     dispatch(formSoldSHow(true, coindid));
-  }
-}
+  };
+};
 
 export const hideSoldSHowDisp = () => {
   return (dispatch) => {
     dispatch(hideSoldSHow(false));
-  }
-}
-
+  };
+};
 
 const formSoldSHow = (show, coindid) => {
   return {
@@ -356,9 +309,9 @@ const formSoldSHow = (show, coindid) => {
     payload: {
       items: {
         show: show,
-        id: coindid
-      }
-    }
+        id: coindid,
+      },
+    },
   };
 };
 
@@ -367,21 +320,15 @@ const hideSoldSHow = (show) => {
     type: types.showFormSold,
     payload: {
       items: {
-        show: show
-      }
-    }
+        show: show,
+      },
+    },
   };
 };
-
-
-
-
 
 ///REALIZA LA COMPRA Y LO GUARDA EN LA BASE DE DATOS
 export const saveBuy = (idCoin, cantidad, precioCompra, plataRestante, img) => {
   return async (dispatch, getState) => {
-
-
     dispatch(loadingCheck(true));
     const history = {
       idcoin: idCoin,
@@ -389,147 +336,140 @@ export const saveBuy = (idCoin, cantidad, precioCompra, plataRestante, img) => {
       precioCompra: precioCompra,
       fecha: Date.now(),
       img: img,
-      tipo: 'compra'
-    }
+      tipo: "compra",
+    };
 
     let portafolio = {
       idcoin: idCoin,
       cantidad: cantidad,
-      img: img
-    }
+      img: img,
+    };
 
     let Money = {
-      money: plataRestante
-    }
+      money: plataRestante,
+    };
 
-    await db.collection(`${getState().auth.uid}`).doc('trading').collection('history').doc(`${history.fecha}`).set(history);
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("history")
+      .doc(`${history.fecha}`)
+      .set(history);
 
-
-
-    await db.collection(`${getState().auth.uid}`)
-      .doc('trading')
-      .collection('portafolio')
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("portafolio")
       .doc(`${portafolio.idcoin}`)
-      .get().then(async (docs) => {
+      .get()
+      .then(async (docs) => {
         if (docs.exists) {
-          portafolio.cantidad = parseFloat(portafolio.cantidad) + parseFloat(docs.data().cantidad)
+          portafolio.cantidad =
+            parseFloat(portafolio.cantidad) + parseFloat(docs.data().cantidad);
         }
-        await db.collection(`${getState().auth.uid}`)
-          .doc('trading')
-          .collection('portafolio')
+        await db
+          .collection(`${getState().auth.uid}`)
+          .doc("trading")
+          .collection("portafolio")
           .doc(`${portafolio.idcoin}`)
           .set(portafolio);
       });
 
-    await db.collection(`${getState().auth.uid}`).doc('trading').update(Money);
+    await db.collection(`${getState().auth.uid}`).doc("trading").update(Money);
 
     let array = [];
 
-    await db.collection(`${getState().auth.uid}`)
-      .doc('trading')
-      .collection('portafolio')
-      .get().then((querySnapshot) => {
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("portafolio")
+      .get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          array.push(doc.data())
+          array.push(doc.data());
         });
-      })
+      });
     dispatch(buyCriptomoneda(array));
     dispatch(setMoney(plataRestante));
     dispatch(loadingCheck(false));
-  }
-}
-
+  };
+};
 
 const buyCriptomoneda = (docs) => {
   return {
     type: types.setPortafolio,
     payload: {
-      docs
-    }
+      docs,
+    },
   };
-}
-
+};
 
 const setMoney = (money) => {
   return {
     type: types.setMoney,
     payload: {
-      money
+      money,
     },
   };
 };
 
-
-
-
-
-
-
-
 ///OBTIENE LAS MOENDAS QUE ESTAN EN EL PORTAFOLIOS
 export const getPortafolio = () => {
   return async (dispatch, getState) => {
-
     let array = [];
-    await db.collection(`${getState().auth.uid}`)
-      .doc('trading')
-      .collection('portafolio')
-      .get().then((querySnapshot) => {
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("portafolio")
+      .get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          array.push(doc.data())
+          array.push(doc.data());
         });
-      })
+      });
     dispatch(buyCriptomoneda(array));
     dispatch(loadingCheck(false));
-  }
-}
-
-
-
-
-
+  };
+};
 
 ///OBTIENE EL PORTAFOLIO DE LAS PERSONAS
 export const getHistory = () => {
   return async (dispatch, getState) => {
-
     let array = [];
-    await db.collection(`${getState().auth.uid}`)
-      .doc('trading')
-      .collection('history')
-      .get().then((querySnapshot) => {
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("history")
+      .get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          array.push(doc.data())
+          array.push(doc.data());
         });
-      });      
+      });
     dispatch(historyCoin(array));
     dispatch(loadingCheck(false));
-  }
-}
-
-
+  };
+};
 
 const historyCoin = (coinHistory) => {
   return {
     type: types.getHistoryUser,
     payload: {
-      coinHistory
-    }
+      coinHistory,
+    },
   };
-}
-
-
-
-
-
-
-
+};
 
 ///REALIZA LA VENTA Y LO GUARDA EN LA BASE DE DATOS
-export const savesSold = (idCoin, cantidad, precioVenta, plataRestante, img, eliminar) => {
+export const savesSold = (
+  idCoin,
+  cantidad,
+  precioVenta,
+  plataRestante,
+  img,
+  eliminar
+) => {
   return async (dispatch, getState) => {
-
-
     dispatch(loadingCheck(true));
     const history = {
       idcoin: idCoin,
@@ -537,51 +477,58 @@ export const savesSold = (idCoin, cantidad, precioVenta, plataRestante, img, eli
       precioCompra: precioVenta,
       fecha: Date.now(),
       img: img,
-      tipo: 'venta'
-    }
+      tipo: "venta",
+    };
 
     let portafolio = {
       idcoin: idCoin,
       cantidad: cantidad,
-      img: img
-    }
+      img: img,
+    };
 
     let Money = {
-      money: plataRestante
-    }
+      money: plataRestante,
+    };
 
-    await db.collection(`${getState().auth.uid}`).doc('trading').collection('history').doc(`${history.fecha}`).set(history);
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("history")
+      .doc(`${history.fecha}`)
+      .set(history);
 
     if (eliminar) {
-      await db.collection(`${getState().auth.uid}`)
-        .doc('trading')
-        .collection('portafolio')
+      await db
+        .collection(`${getState().auth.uid}`)
+        .doc("trading")
+        .collection("portafolio")
         .doc(`${portafolio.idcoin}`)
-        .delete()
-    }
-    else {
-
-      await db.collection(`${getState().auth.uid}`)
-        .doc('trading')
-        .collection('portafolio')
+        .delete();
+    } else {
+      await db
+        .collection(`${getState().auth.uid}`)
+        .doc("trading")
+        .collection("portafolio")
         .doc(`${portafolio.idcoin}`)
         .set(portafolio);
     }
 
-    await db.collection(`${getState().auth.uid}`).doc('trading').update(Money);
+    await db.collection(`${getState().auth.uid}`).doc("trading").update(Money);
 
     let array = [];
 
-    await db.collection(`${getState().auth.uid}`)
-      .doc('trading')
-      .collection('portafolio')
-      .get().then((querySnapshot) => {
+    await db
+      .collection(`${getState().auth.uid}`)
+      .doc("trading")
+      .collection("portafolio")
+      .get()
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          array.push(doc.data())
+          array.push(doc.data());
         });
-      })
+      });
     dispatch(buyCriptomoneda(array));
     dispatch(setMoney(plataRestante));
     dispatch(loadingCheck(false));
-  }
-}
+  };
+};
