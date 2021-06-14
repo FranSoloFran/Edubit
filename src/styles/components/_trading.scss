@@ -13,8 +13,7 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 900px;
-  margin-left: 10px;
-  margin-right: auto;
+  margin: auto;
   width: 70%;
 }
 
@@ -28,8 +27,8 @@
   }
 }
 
-@import './tradingCoins.scss';
-@import './tradingBooks.scss';
-@import './tradingCharts.scss';
-@import './tradingUser.scss';
-@import './tradingUserForm.scss';
+@import "./tradingCoins.scss";
+@import "./tradingBooks.scss";
+@import "./tradingCharts.scss";
+@import "./tradingUser.scss";
+@import "./tradingUserForm.scss";
