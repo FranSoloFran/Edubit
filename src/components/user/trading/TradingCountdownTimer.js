@@ -48,7 +48,7 @@ export const TradingCountdownTimer = () => {
 
   return (
     <div>
-      Los valores se recargarán en:{" "}
+      Los valores se actualizarán en:{" "}
       {timerComponents.length ? (
         timerComponents
       ) : (

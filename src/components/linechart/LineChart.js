@@ -3,6 +3,7 @@ import React from "react";
 
 import Plotly from "../../helper/plotlySmall";
 import createPlotlyComponent from "react-plotly.js/factory";
+import { formatToCurrency } from "../../helper/verifyTextbox";
 const Plot = createPlotlyComponent(Plotly);
 
 export function LineChart({ index, price, volumes }) {
@@ -71,8 +72,8 @@ export function LineChart({ index, price, volumes }) {
   return (
     <>
       <h2 style={{ textAlign: "center", padding: "5px" }}>
-        Precio actual: $
-        {parseFloat(data.price[data.price.length - 1]).toFixed(2)}
+        Precio de referencia: U$D{" "}
+        {formatToCurrency(parseFloat(data.price[data.price.length - 1]))}
       </h2>
       <Plot
         id="chart"

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatToCurrency } from "../../../../helper/verifyTextbox";
 import { hideBuySHowDisp, saveBuy } from "../../../../reducers/tradingReducer";
-import { showError } from "../../../../reducers/msgboxReducer";
+import { showError, showWarning } from "../../../../reducers/msgboxReducer";
 
 export const TradingUserFormBuy = () => {
   const dispatch = useDispatch();
@@ -10,26 +10,31 @@ export const TradingUserFormBuy = () => {
   const money = useSelector((state) => state.trading.money);
   const compra = useSelector((state) => state.trading.pricesBidAsk);
   const form = useSelector((state) => state.trading.showFormBuy);
-  const marketCoins = useSelector((state) => state.trading.marketCoins);
-  const idcoin = useSelector((state) => state.trading.selectCoinID);
+  const coin = useSelector((state) => state.trading.selectCoin);
 
-  const coin = marketCoins.filter((item) => item.id === idcoin)[0];
-
-  const [total, setTotal] = useState("");
+  const [total, setTotal] = useState(0);
+  const [cantidad, setCantidad] = useState("");
 
   const handleChange = (e) => {
-    if (parseFloat(e.target.value) < 0) {
-      setTotal(0);
-    } else if (parseFloat(e.target.value) * compra[0].compra[0] < money) {
-      setTotal(e.target.value);
-    } else {
-      setTotal(money / compra[0].compra[0]);
+    if (parseFloat(e.target.value)) {
+      let input = parseFloat(e.target.value);
+      if (input < 0) {
+        setCantidad(0);
+        setTotal(0);
+      } else if (input * compra[0].compra[0] < money) {
+        setTotal(input * compra[0].compra[0]);
+        setCantidad(input);
+      } else {
+        setCantidad(money / compra[0].compra[0]);
+        setTotal(money);
+      }
     }
   };
 
   const handleClickHide = (e) => {
     e.preventDefault();
     setTotal(0);
+    setCantidad("");
     dispatch(hideBuySHowDisp());
   };
 
@@ -38,16 +43,25 @@ export const TradingUserFormBuy = () => {
 
     if (total > 0) {
       dispatch(
-        saveBuy(
-          idcoin,
-          total,
-          compra[0].compra[0],
-          money - compra[0].compra[0] * total,
-          coin.image
+        showWarning(
+          "Alerta",
+          "¿Está seguro que quiere continuar con la operación?",
+          function () {
+            dispatch(
+              saveBuy(
+                coin.id,
+                coin.name,
+                total,
+                compra[0].compra[0],
+                money - compra[0].compra[0] * total,
+                coin.image
+              )
+            );
+            setTotal(0);
+            dispatch(hideBuySHowDisp());
+          }
         )
       );
-      setTotal(0);
-      dispatch(hideBuySHowDisp());
     } else {
       dispatch(showError("Error", "La cantidad a comprar debe ser mayor a 0."));
     }
@@ -60,35 +74,33 @@ export const TradingUserFormBuy = () => {
       <div className="trading__user-form">
         <section className="trading__user-form-container">
           <section className="trading__user-form-title">
-            <h3>OPERACIONES DE COMPRA</h3>
-            <p>Dinero disponible: U$D {formatToCurrency(money)}</p>
+            <h3>OPERACIÓN DE COMPRA</h3>
+            <div className="div-group-input div-group-input-important">
+              <p>Dinero disponible: U$D {formatToCurrency(money)}</p>
+            </div>
+            <div className="div-group-input">
+              <p>{"Moneda a comprar: " + coin.name}</p>
+              <p>
+                Precio de compra: U$D {formatToCurrency(compra[0].compra[0])}
+              </p>
+            </div>
+            <div className="div-group-input div-group-input-important">
+              <p>Dinero a pagar: U$D {formatToCurrency(total)}</p>
+            </div>
           </section>
           <form className="trading__user-form-form" onSubmit={handleClickBuy}>
             <div className="div-group-input">
               <input
                 autoComplete="off"
                 className="input"
-                name="coin"
-                readOnly
-                type="text"
-                value={"Moneda a comprar: " + coin.name}
-              />
-            </div>
-
-            <div className="div-group-input">
-              <input
-                autoComplete="off"
-                className="input"
-                name="total"
+                name="cantidad"
                 onChange={handleChange}
                 required
                 type="number"
-                value={total}
+                value={cantidad}
               />
               <label className="lbl">Total a comprar</label>
             </div>
-
-            <p>Precio de compra: U$D {formatToCurrency(compra[0].compra[0])}</p>
 
             <section className="trading__user-form-container-buttons">
               <button

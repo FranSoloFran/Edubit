@@ -11,40 +11,42 @@ let time = null;
 export const TradingBooks = () => {
   const dispatch = useDispatch();
   const listCoins = useSelector((state) => state.trading.pricesBidAsk);
-  const idCoin = useSelector((state) => state.trading.selectCoinID);
+  const coin = useSelector((state) => state.trading.selectCoin);
   const dayCoin = useSelector((state) => state.trading.selectCoinDay);
 
   useEffect(() => {
-    if (idCoin !== "") {
-      dispatch(getPriceBidAsk(idCoin, true));
+    if (coin.id !== "") {
+      dispatch(getPriceBidAsk(coin.id, true));
       time = "ini";
     }
     if (time !== null) {
       time = setInterval(() => {
         dispatch(infoCoinMarketPrice(dayCoin));
-        dispatch(getPriceBidAsk(idCoin, true));
+        dispatch(getPriceBidAsk(coin.id, true));
       }, 300000);
     }
     return () => {
       clearInterval(time);
     };
-  }, [dispatch, idCoin, dayCoin]);
+  }, [dispatch, coin, dayCoin]);
 
-  return idCoin !== "" ? (
+  return coin.id !== "" ? (
     <div className="trading__books">
       {/* donde esta la plaza compradora y vendedora */}
       <section className="trading__books-sold-buy">
         <p>
           {listCoins.length > 0 &&
             listCoins[0].venta.map((item, index) => (
-              <span key={"vent" + index}>Venta: ${formatToCurrency(item)}</span>
+              <span key={"vent" + index}>
+                Venta: U$D {formatToCurrency(item)}
+              </span>
             ))}
         </p>
         <p>
           {listCoins.length > 0 &&
             listCoins[0].compra.map((item, index) => (
               <span key={"comp" + index}>
-                Compra: ${formatToCurrency(item)}
+                Compra: U$D {formatToCurrency(item)}
               </span>
             ))}
         </p>

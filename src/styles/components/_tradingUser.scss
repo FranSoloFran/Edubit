@@ -45,10 +45,9 @@
 }
 
 .trading__user-menu-table {
-  list-style: none;
-  height: 500px;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 0 0 10px;
 }
 
 .trading__user-menu-table button {
@@ -84,6 +83,7 @@
   color: white;
   text-align: left;
   font-weight: bold;
+  padding-bottom: 10px;
 }
 
 .trading__user-menu-table-row img {

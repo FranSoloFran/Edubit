@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { TradingBooks } from "./TradingBooks";
 import {
   coinsMarketsAPI,
-  infoCoinMarketPrice, 
+  infoCoinMarketPrice,
   selectCoin,
-  selectCoinDay
+  selectCoinDay,
 } from "../../../reducers/tradingReducer";
-
-
 
 export const TradingCoins = () => {
   const dispatch = useDispatch();
@@ -24,46 +22,47 @@ export const TradingCoins = () => {
   ];
 
   const listCoins = useSelector((state) => state.trading.marketCoins);
-  const [coinselect, setCoinSelect] = useState("");
+  const [coinSelect, setCoinSelect] = useState(null);
   const [filterSelect, setFilterSelect] = useState(listFilters[0]);
- 
+
   useEffect(() => {
-    dispatch(coinsMarketsAPI()); 
+    dispatch(coinsMarketsAPI());
   }, [dispatch]);
 
-   const handleClickCoin = (id) => {
-    setCoinSelect(id);
-    dispatch(selectCoin(id));
+  const handleClickCoin = (coin) => {
+    setCoinSelect(coin);
+    dispatch(selectCoin(coin));
     dispatch(infoCoinMarketPrice(filterSelect));
-  }
+  };
 
   const handleClickFilter = (days) => {
     setFilterSelect(days);
     dispatch(selectCoinDay(days));
-    if (coinselect && days) dispatch(infoCoinMarketPrice(days));
+    if (coinSelect !== null && days > 0) dispatch(infoCoinMarketPrice(days));
   };
 
-  if (!coinselect && listCoins && listCoins.length > 0) {
-    setCoinSelect(listCoins[0].id);
+  if (coinSelect === null && listCoins.length > 0) {
+    setCoinSelect(listCoins[0]);
     setFilterSelect(listFilters[0].days);
     dispatch(selectCoinDay(listFilters[0].days));
-    dispatch(selectCoin(listCoins[0].id));
+    dispatch(selectCoin(listCoins[0]));
     dispatch(infoCoinMarketPrice(listFilters[0].days));
   }
-
 
   return (
     <div className="trading__coins">
       {/* las monedas que podes ver en el mercado, poner un máximo de 5 */}
-      <h2 className="trading__coins-title">Seleccione una criptomenda:</h2>
+      <h2 className="trading__coins-title">Seleccione una criptomoneda:</h2>
       <section className="trading__coins-container">
         {listCoins.length > 0 && (
           <div className="trading__coins-group">
             {listCoins.map((coin) => (
               <div
-                onClick={() => handleClickCoin(coin.id)}
+                onClick={() => handleClickCoin(coin)}
                 className={`trading__coins-name ${
-                  coinselect === coin.id ? "trading__coins-name-active" : ""
+                  coinSelect && coinSelect.id === coin.id
+                    ? "trading__coins-name-active"
+                    : ""
                 }`}
                 key={coin.id}
               >
@@ -97,9 +96,7 @@ export const TradingCoins = () => {
             ))}
           </div>
         )}
-        {(coinselect!=="")
-        ?<TradingBooks />
-        :<></>}
+        {coinSelect !== null ? <TradingBooks /> : <></>}
       </section>
     </div>
   );

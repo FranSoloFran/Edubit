@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TradingUserMoney } from "./TradingUserMoney";
 import { formBuySHowDisp } from "../../../../reducers/tradingReducer";
 import { TradingUserPortafolio } from "./TradingUserPortafolio";
 
 export const TradingUser = () => {
   const dispatch = useDispatch();
+  const coin = useSelector((state) => state.trading.selectCoin);
 
   const handleclick = () => {
     dispatch(formBuySHowDisp());
@@ -23,7 +24,7 @@ export const TradingUser = () => {
 
       <section className="trading__user-menu-buttons">
         <button className="trading__user-menu-buy" onClick={handleclick}>
-          Comprar
+          Comprar {coin.name}
         </button>
       </section>
 

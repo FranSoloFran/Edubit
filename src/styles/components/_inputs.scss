@@ -1,18 +1,20 @@
-
-
 //DIVS AND INPUT FLOAT
-.divinputs{
-    position: relative;
-    top:30px;
-    margin:auto;
-    width: 90%;
-    max-width: 400px;
+.divinputs {
+  position: relative;
+  top: 30px;
+  margin: auto;
+  width: 90%;
+  max-width: 400px;
 }
 
+.div-group-input {
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
 
-.div-group-input{
-    margin-bottom: 20px;
-    margin-top: 10px;    
+.div-group-input-important {
+  font-size: large;
+  font-weight: bold;
 }
 
 .input {
@@ -20,20 +22,18 @@
   border-bottom: 1px solid #757575;
   display: block;
   font-size: 16px;
-  padding: 10px 10px 10px 5px;  
-  width: 98%; 
-  
+  padding: 10px 10px 10px 5px;
+  width: 98%;
 
-  &:focus{
-    border-bottom: 2px solid #4285f4;;
+  &:focus {
+    border-bottom: 2px solid #4285f4;
     outline: none;
   }
 
-  &:valid{
+  &:valid {
     border-bottom: 2px solid #4285f4;
   }
 }
-
 
 .lbl {
   color: #999;
@@ -48,9 +48,8 @@
 }
 
 .input:focus ~ .lbl,
-.input:valid ~ .lbl
-{
-    color: #4285f4;
-    font-size: 12px;
-    top: -55px;  
+.input:valid ~ .lbl {
+  color: #4285f4;
+  font-size: 12px;
+  top: -55px;
 }
