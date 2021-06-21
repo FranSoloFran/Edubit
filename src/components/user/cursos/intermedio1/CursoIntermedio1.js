@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Carousel } from "3d-react-carousal";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourses, saveCourseEnroll } from "../../../reducers/coursesReducer";
-import { showOk } from "../../../reducers/msgboxReducer";
+import { showOk } from "../../../../reducers/msgboxReducer";
+import { Link } from "react-router-dom";
+import { getCourses, saveUserCourse } from "../../../../reducers/coursesReducer";
 
-export const CursoBasico = () => {
+export const CursoIntermedio1 = () => {
   let slides = [
     <iframe
       width="720"
       height="460"
-      src="https://www.youtube.com/embed/GkAQH-1ezEQ"
+      src="https://www.youtube.com/embed/fWdzIB1wJf0"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -18,7 +19,7 @@ export const CursoBasico = () => {
     <iframe
       width="720"
       height="460"
-      src="https://www.youtube.com/embed/3UvIrt-rDxo"
+      src="https://www.youtube.com/embed/LHRC5UIBo5Q"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -27,7 +28,7 @@ export const CursoBasico = () => {
     <iframe
       width="720"
       height="460"
-      src="https://www.youtube.com/embed/9HgyJYndiA0"
+      src="https://www.youtube.com/embed/NGIT5lPDMk4"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -36,7 +37,7 @@ export const CursoBasico = () => {
     <iframe
       width="720"
       height="460"
-      src="https://www.youtube.com/embed/KlzzlQBDBfI"
+      src="https://www.youtube.com/embed/LjmJkeQHoBc"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -46,26 +47,34 @@ export const CursoBasico = () => {
 
   const dispatch = useDispatch();
   const [enrollButton, setEnrollButton] = useState(true);
+  const [finishedCourse, setFinishedCourse] = useState(false);
   const userCourses = useSelector((state) => state.courses.userCourses);
+
   const courseData = {
-    id: "1",
-    name: "Curso Básico",
-    route: "CursoBasico",
+    id: "2",
+    name: "Criptomonedas 101 - Nivel Intermedio 1",
+    route: "cursoIntermedio1",
+    steps: 5
   };
 
   useState(() => {
     dispatch(getCourses());
     if (userCourses.find((course) => course.id === courseData.id)) {
       setEnrollButton(false);
+      const index = userCourses.findIndex((course) => course.id === courseData.id)
+      if (userCourses[index].completed) {
+        setFinishedCourse(true);
+      }
     }
   }, [userCourses]);
 
   const handleCourseEnroll = () => {
-    dispatch(saveCourseEnroll(courseData));
     setEnrollButton(!enrollButton);
     if (!enrollButton) {
+      dispatch(saveUserCourse(courseData, 1, false, true));
       dispatch(showOk(courseData.name, "Has abandonado el curso"));
     } else {
+      dispatch(saveUserCourse(courseData, 1, false, false));
       dispatch(showOk(courseData.name, "Te has inscripto al curso"));
     }
   };
@@ -76,7 +85,8 @@ export const CursoBasico = () => {
         <br /> <br /> <br /> <br /> <br />
         <Carousel slides={slides} autoplay={false} interval={3000} />
         <div className="cursos__container_title">
-          <h1>Curso Basico:</h1>
+          {finishedCourse ? <h1>Criptomonedas 101 - Nivel Intermedio 1: Completado</h1> : <h1>Criptomonedas 101 - Nivel Intermedio 1: </h1>}
+
           {enrollButton ? (
             <button
               className="cursos__button_inscribir"
@@ -85,31 +95,46 @@ export const CursoBasico = () => {
               Inscribirme
             </button>
           ) : (
-            <button
-              className="cursos__button_abandonar"
-              onClick={handleCourseEnroll}
-            >
-              Abandonar
-            </button>
+            <>
+              {!finishedCourse ?
+                <>
+                  <Link to="/landingpage/cursos/cursoBasico/1">
+                    <button className="cursos__button_inscribir">
+                      Ir al contenido
+                    </button>
+                  </Link>
+                  <button
+                    className="cursos__button_abandonar"
+                    onClick={handleCourseEnroll}
+                  >
+                    Abandonar
+                  </button>
+                </>
+                :
+                null}
+
+            </>
           )}
         </div>
         <div className="cursos__container_item">
           <div className="cursos__text_item">
-            <h2 className="cursos__title_item f2">Criptomonedas. ¿Qué son?</h2>
+            <h2 className="cursos__title_item f2">
+              ¿Qué determina el precio de una criptomoneda?
+            </h2>
             <p className="cursos__paragraph_item f4">
-              Una criptomoneda es un activo digital que emplea un cifrado
-              criptográfico para garantizar su titularidad y asegurar la
-              integridad de las transacciones, y controlar la creación de
-              unidades adicionales, es decir, evitar que alguien pueda hacer
-              copias como haríamos, por ejemplo, con una foto. Estas monedas no
-              existen de forma física: se almacenan en una cartera digital.
+              El valor de las criptomonedas varía en función de la oferta, de la
+              demanda, y del compromiso de los usuarios. Este valor se forma en
+              ausencia de mecanismos eficaces que impidan su manipulación, como
+              los presentes en los mercados regulados de valores. En muchas
+              ocasiones los precios se forman también sin información pública
+              que los respalde.
             </p>
           </div>
           <div className="cursos__img_item">
             <iframe
               width="560"
               height="315"
-              src="https://www.youtube.com/embed/GkAQH-1ezEQ"
+              src="https://www.youtube.com/embed/fWdzIB1wJf0"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -122,7 +147,7 @@ export const CursoBasico = () => {
             <iframe
               width="560"
               height="315"
-              src="https://www.youtube.com/embed/3UvIrt-rDxo"
+              src="https://www.youtube.com/embed/LHRC5UIBo5Q"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -131,36 +156,42 @@ export const CursoBasico = () => {
           </div>
           <div className="cursos__text_item">
             <h2 className="cursos__title_item f2">
-              Errores comunes al invertir en criptomonedas
+              Cuestiones legales de las criptomonedas
             </h2>
             <p className="cursos__paragraph_item f4">
-              ¿Cuáles son los errores que se deben evitar para invertir en
-              Bitcoin? No tener conocimientos sobre Bitcoin y el funcionamiento
-              de criptomonedas Sin una formación sobre cómo funciona Bitcoin y
-              el mundo de las criptomonedas en general se está expuesto a creer
-              en todo lo que dicen los medios, sin tener capacidad para crearse
-              un criterio propio.
+              Es una buena ocasión para recordar que una de las premisas
+              fundacionales de Bitcoin es la de poder realizar pagos entre dos
+              partes directamente, sin necesidad de intervención de entidades
+              centralizadas. Muchos ven en Bitcoin algo revolucionario, algunos
+              incluso hablan de separación del dinero y el Estado. Pero claro,
+              esto no le hace ni un poquito de gracia a los bancos, ni a los
+              gobiernos, ni a los organismos supranacionales que se encargan de
+              esas cuestiones. En Argentina, hay una larga tradición de tener
+              dinero y no declararlo e incluso de realizar todo tipo de
+              transacciones comerciales sin tampoco declararlas a ningún
+              organismos estatal.
             </p>
           </div>
         </div>
         <div className="cursos__container_item">
           <div className="cursos__text_item">
             <h2 className="cursos__title_item f2">
-              Criptomonedas más populares
+              Cómo evitar inconvenientes legales
             </h2>
             <p className="cursos__paragraph_item f4">
-              ¿Cuántas criptomonedas existen? Más de 2000 y subiendo. Cada
-              semana se crea alguna nueva divisa virtual en un proceso que se
-              denomina ICO y que más adelante resumiremos. Entre las más
-              conocidas están: Bitcoin, Ethereum, Litecoin, Cardano,
-              Bitcoincash, Iota, Ripple, Tron, entre otras.
+              El fisco todavía no puede obtener información de portales que no
+              están radicados en el país, y el caso más famoso sería el de
+              Binance. Para facilitar sus declaraciones o requerimientos de
+              información que pudieran recibir, sugerimos que vayan registrando
+              las operaciones que son o que puede llegar a ser visibles para los
+              organismos de control y recaudación.
             </p>
           </div>
           <div className="cursos__img_item">
             <iframe
               width="560"
               height="315"
-              src="https://www.youtube.com/embed/9HgyJYndiA0"
+              src="https://www.youtube.com/embed/NGIT5lPDMk4"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -173,7 +204,7 @@ export const CursoBasico = () => {
             <iframe
               width="560"
               height="315"
-              src="https://www.youtube.com/embed/KlzzlQBDBfI"
+              src="https://www.youtube.com/embed/LjmJkeQHoBc"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -181,16 +212,10 @@ export const CursoBasico = () => {
             ></iframe>
           </div>
           <div className="cursos__text_item">
-            <h2 className="cursos__title_item f2">¿Qué es el Bitcoin?</h2>
-            <p className="cursos__paragraph_item f4">
-              Bitcoin es una moneda virtual o un medio de intercambio
-              electrónico que sirve para adquirir productos y servicios como
-              cualquier otra moneda. Pero esta moneda es descentralizada, es
-              decir que no existe una autoridad o ente de control que sea
-              responsable de su emisión y registro de sus movimientos. Consiste
-              en una clave criptográfica que se asocia a un monedero virtual, el
-              cual descuenta y recibe pagos.
-            </p>
+            <h2 className="cursos__title_item f2">
+              Comprar/vender criptomonedas en Argentina. Distintos métodos
+            </h2>
+            <p className="cursos__paragraph_item f4">...</p>
           </div>
         </div>
       </div>

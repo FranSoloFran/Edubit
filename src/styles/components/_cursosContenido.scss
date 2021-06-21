@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772FF;
+$color-form-highlight: #EEEEEE;
+
+.cursosContenido__container {
+	align-items: center;
+	margin-left: auto;
+	margin-right: auto;	
+	max-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.cursosContenido__container_title {
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	margin: auto;
+	margin-top: 70px;
+	margin-left: 160px;
+	max-width: 1300px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+//BODY DEL cursos
+.cursosContenido__container_item {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	margin-top: 70px;
+	max-width: 1300px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+//Contiene el titulo, subtitulo y parrafo
+.cursosContenido__text_item {
+	margin: auto;
+	max-width: 100%;
+	padding-bottom: 30px;
+	width: 100%;
+}
+
+.cursosContenido__title_item {
+	display: block;
+	font-size: 40px;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.cursosContenido__paragraph_item {
+	display: block;
+	font-size: 20px;
+	margin-top: 30px;
+	text-align: center;
+}
+
+.cursosContenido__paragraph_subtitle_item {
+	display: block;
+	font-size: 24px;
+	margin-top: 30px;
+	text-align: center;
+}
+  
+.cursosContenido__subtitle_item {
+	display: block;
+	font-size: 28px;
+	margin-top: 30px;
+	text-align: center;
+}
+  
+
+.cursosContenido__text_video {
+	justify-content: center;
+	margin-top: 5px;
+}
+
+.cursos__button_navegacion {
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	margin: auto;
+	margin-top: 10px;
+	margin-left: 80px;
+	padding: 8px 10px 8px 10px;
+	width: 250px;
+	background-color: #02b902;
+	transition: color .3s ease;
+
+	&:focus {
+		outline: none
+	}
+
+	&:hover {
+		color: darken($color: white, $amount: 20);
+	}
+}
+
+.cursos__button_navegacion_disabled {
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	margin: auto;
+	margin-top: 10px;
+	margin-left: 80px;
+	padding: 8px 10px 8px 10px;
+	width: 250px;
+	background-color: #929aa1;
+	transition: color .3s ease;
+
+	&:focus {
+		outline: none
+	}
+
+	&:hover {
+		color: darken($color: white, $amount: 20);
+	}
+}
+
+.cursosContenido__container_navegacion {
+    display: flex;
+}
+
+.cursosContenido__container_progressbar {
+	width: 600px;
+}
+
+.cursosContenido__progressbar {
+	counter-reset: step;
+}
+.cursosContenido__progressbar li {
+	list-style-type: none;
+	width: 20%;
+	float: left;
+	font-size: 12px;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	color: #7d7d7d;
+}
+.cursosContenido__progressbar li:before {
+	width: 30px;
+	height: 30px;
+	content: counter(step);
+	counter-increment: step;
+	line-height: 30px;
+	border: 2px solid #7d7d7d;
+	display: block;
+	text-align: center;
+	margin: 0 auto 10px auto;
+	border-radius: 50%;
+	background-color: white;
+}
+.cursosContenido__progressbar li:after {
+	width: 100%;
+	height: 2px;
+	content: '';
+	position: absolute;
+	background-color: #7d7d7d;
+	top: 15px;
+	left: -50%;
+	z-index: -1;
+}
+.cursosContenido__progressbar li:first-child:after {
+	content: none;
+}
+.cursosContenido__progressbar li.active {
+	color: green;
+	background-color: transparent;
+}
+.cursosContenido__progressbar li.active:before {
+	border-color: green;
+}
+.cursosContenido__progressbar li.active + li:after {
+	background-color: green;
+}
+
+.cursosContenido__container_evaluacion {
+	display: flex;
+	flex-direction: column;
+	margin-left: 275px;
+}
+
+.cursosContenido__container_evaluacion_opcion {
+	display: flex;
+	flex-direction: row;
+}
+
+.cursosContenido__evaluacion_opcion {
+	display: flex;
+	flex-direction: row;
+}
+
+.cursosContenido__evaluacion_opcion_item  {
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.cursosContenido__container_evaluacion_pregunta {
+	margin-top: 25px;
+}
+
+

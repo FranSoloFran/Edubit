@@ -24,12 +24,17 @@ export const coursesReducer = (state = initialState, action) => {
     };
 }
 
-export const saveCourseEnroll = (course) => {
+export const saveUserCourse = (course, step, completed, deleteCourse) => {
     return async (dispatch, getState) => {
         dispatch(loadingCheck(true));
         let array = getState().courses.userCourses;
         const found = array.find(item => item.id === course.id)
         if (!found) {
+            course = {
+                ...course,
+                step: step,
+                completed: completed
+            }
             array.push(course);
             array.forEach(async (item) => {
                 await db.collection(`${getState().auth.uid}`)
@@ -41,20 +46,41 @@ export const saveCourseEnroll = (course) => {
             dispatch(setCourseList(array));
         }
         else {
-            let newArray = [];
-            array.forEach(async (item) => {
-                if (item.id !== course.id) {
-                    newArray.push(item)
+            if (!deleteCourse) {
+                course = {
+                    step: step,
+                    completed: completed,
+                    ...course,
                 }
-                else {
-                    await db.collection(`${getState().auth.uid}`)
-                        .doc('courses')
-                        .collection('assignedCourses')
-                        .doc(`${item.id}`)
-                        .delete();
+                const index = array.findIndex(item => item.id === course.id)
+                if (step >= array[index].step) {
+                    array[index] = course;
+                    array.forEach(async (item) => {
+                        await db.collection(`${getState().auth.uid}`)
+                            .doc('courses')
+                            .collection('assignedCourses')
+                            .doc(`${item.id}`)
+                            .set(item);
+                    })
+                    dispatch(setCourseList(array));
                 }
-            });
-            dispatch(setCourseList(newArray));
+            }
+            else {
+                let newArray = [];
+                array.forEach(async (item) => {
+                    if (item.id !== course.id) {
+                        newArray.push(item)
+                    }
+                    else {
+                        await db.collection(`${getState().auth.uid}`)
+                            .doc('courses')
+                            .collection('assignedCourses')
+                            .doc(`${item.id}`)
+                            .delete();
+                    }
+                });
+                dispatch(setCourseList(newArray));
+            }
         }
         dispatch(loadingCheck(false));
     }
@@ -85,5 +111,3 @@ export const getCourses = () => {
         dispatch(loadingCheck(false));
     }
 }
-
-

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Carousel } from "3d-react-carousal";
 import { useDispatch, useSelector } from "react-redux";
-import { saveCourseEnroll, getCourses } from "../../../reducers/coursesReducer";
-import { showOk } from "../../../reducers/msgboxReducer";
+import { saveUserCourse, getCourses } from "../../../../reducers/coursesReducer";
+import { showOk } from "../../../../reducers/msgboxReducer";
+import { Link } from "react-router-dom";
 
 export const CursoIntermedio2 = () => {
   let slides = [
@@ -38,25 +39,32 @@ export const CursoIntermedio2 = () => {
   const dispatch = useDispatch();
   const [enrollButton, setEnrollButton] = useState(true);
   const userCourses = useSelector((state) => state.courses.userCourses);
+  const [finishedCourse, setFinishedCourse] = useState(false);
   const courseData = {
     id: "3",
     name: "Curso Intermedio 2",
-    route: "CursoIntermedio2",
+    route: "cursoIntermedio2",
+    steps: 4
   };
 
   useState(() => {
     dispatch(getCourses());
     if (userCourses.find((course) => course.id === courseData.id)) {
       setEnrollButton(false);
+      const index = userCourses.findIndex((course) => course.id === courseData.id)
+      if (userCourses[index].completed) {
+        setFinishedCourse(true);
+      }
     }
   }, [userCourses]);
 
   const handleCourseEnroll = () => {
-    dispatch(saveCourseEnroll(courseData));
     setEnrollButton(!enrollButton);
     if (!enrollButton) {
+      dispatch(saveUserCourse(courseData, 1, false, true));
       dispatch(showOk(courseData.name, "Has abandonado el curso"));
     } else {
+      dispatch(saveUserCourse(courseData, 1, false, false));
       dispatch(showOk(courseData.name, "Te has inscripto al curso"));
     }
   };
@@ -67,7 +75,8 @@ export const CursoIntermedio2 = () => {
         <br /> <br /> <br /> <br /> <br />
         <Carousel slides={slides} autoplay={false} interval={3000} />
         <div className="cursos__container_title">
-          <h1>Curso Intermedio - nivel 2:</h1>
+          {finishedCourse ? <h1>Curso Intermedio 2: Completado</h1> : <h1>Curso Intermedio 2: </h1>}
+
           {enrollButton ? (
             <button
               className="cursos__button_inscribir"
@@ -76,12 +85,25 @@ export const CursoIntermedio2 = () => {
               Inscribirme
             </button>
           ) : (
-            <button
-              className="cursos__button_abandonar"
-              onClick={handleCourseEnroll}
-            >
-              Abandonar
-            </button>
+            <>
+              {!finishedCourse ?
+                <>
+                  <Link to="/landingpage/cursos/cursoBasico/1">
+                    <button className="cursos__button_inscribir">
+                      Ir al contenido
+                    </button>
+                  </Link>
+                  <button
+                    className="cursos__button_abandonar"
+                    onClick={handleCourseEnroll}
+                  >
+                    Abandonar
+                  </button>
+                </>
+                :
+                null}
+
+            </>
           )}
         </div>
         <div className="cursos__container_item">

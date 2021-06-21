@@ -11,38 +11,74 @@ export const MisCursos = () => {
     dispatch(getCourses());
   }, [userCourses]);
 
+
   return (
     <div className="cursos__container">
       <div className="cursos__container_title">
         <h1>Mis Cursos</h1>
       </div>
+      <h2 className="cursos__title_item f4">
+        En progreso
+      </h2>
       <div className="cursosLista__container_cards">
-        {userCourses.length > 0 ? (
-          userCourses.map((course) => {
+        {userCourses.filter((item) => item.completed === false).length > 0 ? (
+          userCourses.filter((item) => item.completed === false).map((course) => {
             return (
               <div className="cursosLista__card" key={course.id}>
                 <h3>{course.name}</h3>
                 <br />
-                <Link to={course.route}>
-                  <button className="cursosLista__button_masInfo">
-                    Ir al curso
-                  </button>
-                </Link>
+                <div class="progress">
+                  <span style={{ width: course.step === 1 ? "0%" : (course.step - 1) * 100 / course.steps + "%" }}>{course.step !== 1 ? (course.step - 1) * 100 / course.steps + "%" : null}</span>
+                </div>
+                <br />
+                <div className="cursosLista__container_buttons_conCursos">
+                  <Link to={`/landingpage/cursos/${course.route}`}>
+                    <button className="cursosLista__button_masInfo">
+                      Temario
+                    </button>
+                  </Link>
+                  <Link to={`/landingpage/cursos/${course.route}/${course.step}`}>
+                    <button className="cursosLista__button_masInfo">
+                      Ir al curso
+                    </button>
+                  </Link>
+                </div>
               </div>
             );
           })
         ) : (
           <div className="cursosLista__container_sinCursos">
-            <h3> No está inscripto a ningún curso</h3>
+            <p className="cursos__paragraph_item f4"> No está inscripto a ningún curso</p>
             <br />
-            <Link to="Cursos">
-              <button className="cursosLista__button_masInfo">
-                Ver cursos disponibles
+            <Link to="/landingpage/cursos">
+              <button className="cursosLista__button_masInfo" style={{ marginLeft: '80px' }}>
+                Ver catálogo
               </button>
             </Link>
           </div>
         )}
       </div>
-    </div>
+      <br />  <br />
+      <h2 className="cursos__title_item f4">
+        Completados
+      </h2>
+      <div className="cursosLista__container_cards">
+        {userCourses.filter((item) => item.completed === true).length > 0 ? (
+          userCourses.filter((item) => item.completed === true).map((course) => {
+            return (
+              <div className="cursosLista__card" key={course.id}>
+                <h3>{course.name}</h3>
+                <br />
+                <Link to={`/landingpage/cursos/${course.route}`}>
+                  <button className="cursosLista__button_masInfo">
+                    Temario
+                  </button>
+                </Link>
+              </div>
+            );
+          })
+        ) : <p className="cursos__paragraph_item f4"> Todavía no has completado ningún curso</p>}
+      </div>
+    </div >
   );
 };
