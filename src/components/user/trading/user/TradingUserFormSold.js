@@ -4,6 +4,8 @@ import { formatToCurrency } from "../../../../helper/verifyTextbox";
 import {
   hideSoldSHowDisp,
   savesSold,
+  getDolar,
+  getRendimiento,
 } from "../../../../reducers/tradingReducer";
 import { showError, showWarning } from "../../../../reducers/msgboxReducer";
 
@@ -14,21 +16,44 @@ export const TradingUserFormSold = () => {
   const portafolio = useSelector((state) => state.trading.coinPortafolio);
   const venta = useSelector((state) => state.trading.pricePriceSold);
   const marketCoins = useSelector((state) => state.trading.marketCoins);
+  const dolar = useSelector((state) => state.trading.dolar);
+  const rendimiento = useSelector((state) => state.trading.rendimiento);
 
   const [total, setTotal] = useState("");
   const [cantidad, setCantidad] = useState(0);
   const [cantidadRestante, setCantidadRestante] = useState(0);
   const [plata, setPlata] = useState(0);
+  const [porcentRendimiento, setPorcentRendimiento] = useState("0");
 
   useEffect(() => {
     if (form.length > 0 && form[0].show) {
       const cant = portafolio.find((item) => item.idcoin === form[0].id);
       setCantidad(parseFloat(cant.cantidad));
+      setCantidadRestante(parseFloat(cant.cantidad));
+      setPlata(money);
+      dispatch(getDolar());
+      dispatch(getRendimiento(form[0].id));
     }
-  }, [form, money, portafolio]);
+    return () => {
+      setTotal("");
+      setCantidad(0);
+      setCantidadRestante(0);
+      setPlata(0);
+      setPorcentRendimiento("0");
+    };
+  }, [form, portafolio, dispatch]);
 
   let coin = {};
   if (form[0]) coin = marketCoins.filter((item) => item.id === form[0].id)[0];
+
+  if (porcentRendimiento === "0" && rendimiento.price) {
+    let percent =
+      (rendimiento.price[rendimiento.price.length - 1] / rendimiento.price[0] -
+        1) *
+      100;
+    percent = formatToCurrency(percent);
+    setPorcentRendimiento(percent);
+  }
 
   const handleChange = (e) => {
     if (parseFloat(e.target.value)) {
@@ -106,15 +131,39 @@ export const TradingUserFormSold = () => {
               </div>
 
               <div className="div-group-input div-group-input-important">
-                <p>Cantidad disponible: {formatToCurrency(cantidad)}</p>
-                <p>Cantidad restante: {formatToCurrency(cantidadRestante)}</p>
+                <p>Cantidad nominal: {formatToCurrency(cantidad)} coins</p>
+                <p>
+                  Cantidad nominal restante:{" "}
+                  {formatToCurrency(cantidadRestante)} coins
+                </p>
               </div>
 
               <div className="div-group-input div-group-input-important">
                 <p>Total de dinero: U$D {formatToCurrency(plata)}</p>
               </div>
 
-              <p>Rendimiento: TODO</p>
+              {dolar.oficial && dolar.blue && dolar.bolsa && (
+                <div className="div-group-input">
+                  <p style={{ textAlign: "center" }}>Precios de referencia</p>
+                  <p>Dólar Oficial: U$D 1 = ${dolar.oficial.venta}</p>
+                  <p>Dólar Blue: U$D 1 = ${dolar.blue.venta}</p>
+                  <p>Dólar Bolsa: U$D 1 = ${dolar.bolsa.venta}</p>
+                </div>
+              )}
+
+              <p className="trading__user-menu-sold-rendimiento">
+                Rendimiento:{" "}
+                <p
+                  className={
+                    parseFloat(porcentRendimiento) > 0
+                      ? "trading__user-menu-sold-high-rendimiento"
+                      : "trading__user-menu-sold-low-rendimiento"
+                  }
+                >
+                  {parseFloat(porcentRendimiento) > 0 ? "🠕" : "🠗"}
+                  {porcentRendimiento}%
+                </p>
+              </p>
             </section>
             <form
               className="trading__user-form-form"

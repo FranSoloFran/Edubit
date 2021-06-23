@@ -12,7 +12,7 @@ export const TradingUserPortafolio = () => {
 
   useEffect(() => {
     dispatch(getPortafolio());
-  }, [portafolio, dispatch]);
+  }, [dispatch]);
 
   const handleClickShowFormSold = (id) => {
     dispatch(getPriceBidAsk(id, false));

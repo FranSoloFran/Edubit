@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatToCurrency } from "../../../../helper/verifyTextbox";
-import { hideBuySHowDisp, saveBuy } from "../../../../reducers/tradingReducer";
+import {
+  hideBuySHowDisp,
+  saveBuy,
+  getDolar,
+} from "../../../../reducers/tradingReducer";
 import { showError, showWarning } from "../../../../reducers/msgboxReducer";
 
 export const TradingUserFormBuy = () => {
@@ -11,9 +15,18 @@ export const TradingUserFormBuy = () => {
   const compra = useSelector((state) => state.trading.pricesBidAsk);
   const form = useSelector((state) => state.trading.showFormBuy);
   const coin = useSelector((state) => state.trading.selectCoin);
+  const dolar = useSelector((state) => state.trading.dolar);
 
   const [total, setTotal] = useState(0);
   const [cantidad, setCantidad] = useState("");
+
+  useEffect(() => {
+    dispatch(getDolar());
+    return () => {
+      setTotal(0);
+      setCantidad("");
+    };
+  }, [dispatch]);
 
   const handleChange = (e) => {
     if (parseFloat(e.target.value)) {
@@ -41,7 +54,7 @@ export const TradingUserFormBuy = () => {
   const handleClickBuy = (e) => {
     e.preventDefault();
 
-    if (total > 0) {
+    if (cantidad > 0 && total >= 0) {
       dispatch(
         showWarning(
           "Alerta",
@@ -51,13 +64,14 @@ export const TradingUserFormBuy = () => {
               saveBuy(
                 coin.id,
                 coin.name,
-                total,
+                cantidad,
                 compra[0].compra[0],
-                money - compra[0].compra[0] * total,
+                money - compra[0].compra[0] * cantidad,
                 coin.image
               )
             );
             setTotal(0);
+            setCantidad("");
             dispatch(hideBuySHowDisp());
           }
         )
@@ -87,6 +101,17 @@ export const TradingUserFormBuy = () => {
             <div className="div-group-input div-group-input-important">
               <p>Dinero a pagar: U$D {formatToCurrency(total)}</p>
             </div>
+            <div className="div-group-input div-group-input-important">
+              <p>Dinero restante: U$D {formatToCurrency(money - total)}</p>
+            </div>
+            {dolar.oficial && dolar.blue && dolar.bolsa && (
+              <div className="div-group-input">
+                <p style={{ textAlign: "center" }}>Precios de referencia</p>
+                <p>Dólar Oficial: U$D 1 = ${dolar.oficial.venta}</p>
+                <p>Dólar Blue: U$D 1 = ${dolar.blue.venta}</p>
+                <p>Dólar Bolsa: U$D 1 = ${dolar.bolsa.venta}</p>
+              </div>
+            )}
           </section>
           <form className="trading__user-form-form" onSubmit={handleClickBuy}>
             <div className="div-group-input">

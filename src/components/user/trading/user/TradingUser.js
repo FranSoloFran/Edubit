@@ -4,6 +4,8 @@ import { TradingUserMoney } from "./TradingUserMoney";
 import { formBuySHowDisp } from "../../../../reducers/tradingReducer";
 import { TradingUserPortafolio } from "./TradingUserPortafolio";
 
+import Portfolio from "../../../../assets/img/Portfolio.png";
+
 export const TradingUser = () => {
   const dispatch = useDispatch();
   const coin = useSelector((state) => state.trading.selectCoin);
@@ -24,12 +26,20 @@ export const TradingUser = () => {
 
       <section className="trading__user-menu-buttons">
         <button className="trading__user-menu-buy" onClick={handleclick}>
-          Comprar {coin.name}
+          <div className="icon-cart"></div>
+          <p>Comprar {coin.name}</p>
         </button>
       </section>
 
       <section className="trading__user-menu-container-table">
-        <p className="trading__user-menu-table-title">Mi Portafolios</p>
+        <p className="trading__user-menu-table-title">
+          <img
+            src={Portfolio}
+            alt=""
+            className="trading__user-menu-table-title-portfolio"
+          />
+          Mi Portafolios
+        </p>
 
         <ul className="trading__user-menu-table">
           <TradingUserPortafolio />

@@ -136,6 +136,8 @@
   margin-top: 10px;
   padding: 8px 10px 8px 10px;
   width: 250px;
+  display: flex;
+  justify-content: center;
 
   transition: color 0.3s ease;
 
@@ -146,6 +148,10 @@
   &:hover {
     color: darken($color: white, $amount: 20);
   }
+}
+
+.trading__user-menu-buy p {
+  padding-top: 10px;
 }
 
 .trading__user-menu-buy {
@@ -188,4 +194,34 @@
     height: 250px;
     width: 100%;
   }
+}
+
+.icon-cart {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-right: 10px;
+}
+
+.trading__user-menu-table-title-portfolio {
+  width: 24px;
+  height: 24px;
+  padding-right: 10px;
+}
+
+.trading__user-menu-sold-rendimiento {
+  display: flex;
+  flex-direction: row;
+}
+
+.trading__user-menu-sold-low-rendimiento {
+  color: red;
+  padding-left: 5px;
+}
+
+.trading__user-menu-sold-high-rendimiento {
+  color: green;
+  padding-left: 5px;
 }

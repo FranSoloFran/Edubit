@@ -17,6 +17,8 @@ const initialState = {
   coinPortafolio: [],
   showFormBuy: false,
   showFormSold: [],
+  dolar: [],
+  rendimiento: {},
 };
 
 const types = {
@@ -31,6 +33,8 @@ const types = {
   getPricePricSold: "[Trading] getPricePricSold",
   setPortafolio: "[Trading] setPortafolio",
   getHistoryUser: "[Trading] GetHistoryCoin",
+  getDolar: "[Trading] GetDolar",
+  getRendimiento: "[Trading] GetRendimiento",
 };
 
 //REDUCERS
@@ -101,6 +105,18 @@ export const tradingReducer = (state = initialState, action) => {
       return {
         ...state,
         coinHistory: action.payload.coinHistory,
+      };
+
+    case types.getDolar:
+      return {
+        ...state,
+        dolar: action.payload.dolar,
+      };
+
+    case types.getRendimiento:
+      return {
+        ...state,
+        rendimiento: action.payload.rendimiento,
       };
 
     default:
@@ -503,6 +519,7 @@ export const savesSold = (
 
       let portafolio = {
         idcoin: idCoin,
+        name: name,
         cantidad: cantidad,
         img: img,
       };
@@ -558,5 +575,70 @@ export const savesSold = (
     } catch (error) {
       dispatch(showError("Error", error));
     }
+  };
+};
+
+export const getDolar = () => {
+  let dolar = {};
+  return async (dispatch) => {
+    const today = new Date();
+    dolar.oficial = {
+      fecha: today,
+      compra: 94.71,
+      venta: 100.71,
+    };
+    dolar.blue = {
+      fecha: today,
+      compra: 159.0,
+      venta: 164.0,
+    };
+    dolar.bolsa = {
+      fecha: today,
+      compra: 159.91,
+      venta: 159.75,
+    };
+
+    dispatch(setDolar(dolar));
+  };
+};
+
+const setDolar = (dolar) => {
+  return {
+    type: types.getDolar,
+    payload: {
+      dolar,
+    },
+  };
+};
+
+export const getRendimiento = (idCoin) => {
+  return async (dispatch, getState) => {
+    await fetch(
+      `${urlApi}/coins/${idCoin}/market_chart?vs_currency=USD&days=30`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        let data = { index: [], price: [], volumes: [] };
+
+        for (const item of result.prices) {
+          data.index.push(item[0]);
+          data.price.push(item[1]);
+        }
+        for (const item of result.total_volumes) data.volumes.push(item[1]);
+
+        dispatch(setRendimiento(data));
+      })
+      .catch((e) => {
+        dispatch(showError("Error", e.message));
+      });
+  };
+};
+
+const setRendimiento = (rendimiento) => {
+  return {
+    type: types.getRendimiento,
+    payload: {
+      rendimiento,
+    },
   };
 };

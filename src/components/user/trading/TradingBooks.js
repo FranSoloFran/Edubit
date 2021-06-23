@@ -28,7 +28,7 @@ export const TradingBooks = () => {
     return () => {
       clearInterval(time);
     };
-  }, [dispatch, coin, dayCoin]);
+  }, [coin.id, dayCoin, dispatch]);
 
   return coin.id !== "" ? (
     <div className="trading__books">
