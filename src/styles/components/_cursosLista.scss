@@ -34,11 +34,11 @@
 	cursor: pointer;
 	font-size: 18px;
 	font-family: Georgia, 'Times New Roman', Times, serif;
-	margin: auto;
 	padding: 8px 10px 8px 10px;
 	width: 250px;
 	background-color: #02b902;
 	transition: color .3s ease;
+	margin: 10px;
 
 	&:focus {
 		outline: none
@@ -49,10 +49,43 @@
 	}
 }
 
+.cursosLista__container_buttons_conCursos {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
 
-.cursosLista__container_sinCursos {
+.cursosLista__container_buttons_sinCursos {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
 }
+
+.progress {
+	background-color: #f9f9f9;
+	color: #fff;
+	box-shadow: inset 0 1px 1px rgba(100, 100, 100, 0.1);
+	box-sizing: initial;
+	color: #fff;
+	font-size: 16px;
+	font-size: 1rem;
+	height: 25px;
+	line-height: 1.7;
+	position: relative;
+	text-align: center;
+	width: 50%;
+	margin-left: 200px;
+  }
+  
+  .progress > span {
+	background-color: #02b902;
+	display: block;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	width: auto;
+  }
+
+

@@ -1,4 +1,5 @@
 import { loadingCheck } from "./loadingReducer";
+import { db } from '../firebase/firebase-config';
 
 const initialState = {
     userCourses: []
@@ -23,24 +24,63 @@ export const coursesReducer = (state = initialState, action) => {
     };
 }
 
-export const saveCourseEnroll = (course) => {
+export const saveUserCourse = (course, step, completed, deleteCourse) => {
     return async (dispatch, getState) => {
-
         dispatch(loadingCheck(true));
         let array = getState().courses.userCourses;
         const found = array.find(item => item.id === course.id)
         if (!found) {
+            course = {
+                ...course,
+                step: step,
+                completed: completed
+            }
             array.push(course);
+            array.forEach(async (item) => {
+                await db.collection(`${getState().auth.uid}`)
+                    .doc('courses')
+                    .collection('assignedCourses')
+                    .doc(`${item.id}`)
+                    .set(item);
+            })
             dispatch(setCourseList(array));
         }
         else {
-            let newArray = [];
-            array.forEach(item => {
-                if (item.id !== course.id) {
-                    newArray.push(item)
+            if (!deleteCourse) {
+                course = {
+                    step: step,
+                    completed: completed,
+                    ...course,
                 }
-            });
-            dispatch(setCourseList(newArray));
+                const index = array.findIndex(item => item.id === course.id)
+                if (step >= array[index].step) {
+                    array[index] = course;
+                    array.forEach(async (item) => {
+                        await db.collection(`${getState().auth.uid}`)
+                            .doc('courses')
+                            .collection('assignedCourses')
+                            .doc(`${item.id}`)
+                            .set(item);
+                    })
+                    dispatch(setCourseList(array));
+                }
+            }
+            else {
+                let newArray = [];
+                array.forEach(async (item) => {
+                    if (item.id !== course.id) {
+                        newArray.push(item)
+                    }
+                    else {
+                        await db.collection(`${getState().auth.uid}`)
+                            .doc('courses')
+                            .collection('assignedCourses')
+                            .doc(`${item.id}`)
+                            .delete();
+                    }
+                });
+                dispatch(setCourseList(newArray));
+            }
         }
         dispatch(loadingCheck(false));
     }
@@ -57,9 +97,17 @@ const setCourseList = (courses) => {
 
 export const getCourses = () => {
     return async (dispatch, getState) => {
-        let array = getState().courses.userCourses;
+        let array = [];
+        dispatch(loadingCheck(true));
+        await db.collection(`${getState().auth.uid}`)
+            .doc('courses')
+            .collection('assignedCourses')
+            .get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    array.push(doc.data())
+                });
+            })
         dispatch(setCourseList(array));
+        dispatch(loadingCheck(false));
     }
 }
-
-

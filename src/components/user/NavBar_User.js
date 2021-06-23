@@ -104,13 +104,13 @@ export const NavBarUser = () => {
                   </label>
                   <ul>
                     <li>
-                      <Link to="/landingpage/misCursos">
-                        <span className="icon-play"></span>
+                      <Link to="/landingpage/cursos/misCursos">
+                        <span className="icon-list"></span>
                         Mis Cursos
                       </Link>
                       <Link to="/landingpage/cursos">
-                        <span className="icon-play"></span>
-                        Ver Cursos
+                        <span className="icon-books"></span>
+                        Catálogo
                       </Link>
                     </li>
                     {/*<li>

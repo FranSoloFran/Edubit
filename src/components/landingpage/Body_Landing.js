@@ -20,7 +20,7 @@ export const BodyLanding = () => {
           </Link>
         </div>
         <div className="landing__modulos_edubit">
-          <Link to="/landingpage/misCursos">
+          <Link to="/landingpage/cursos/misCursos">
             <div className="landing__img_modulos_edubit">
               <img src={Vid} alt="" />
             </div>

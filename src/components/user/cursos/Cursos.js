@@ -9,30 +9,30 @@ export const Cursos = () => {
       </div>
       <div className="cursosLista__container_cards">
         <div className="cursosLista__card">
-          <h3>Curso Básico</h3>
+          <h3>Criptomonedas 101 - Nivel Básico</h3>
           <br />
-          <Link to="CursoBasico">
+          <Link to="/landingpage/cursos/cursoBasico">
             <button className="cursosLista__button_masInfo">Ir al curso</button>
           </Link>
         </div>
         <div className="cursosLista__card">
-          <h3>Curso Intermedio 1</h3>
+          <h3>Criptomonedas 101 - Nivel Intermedio 1</h3>
           <br />
-          <Link to="CursoIntermedio1">
+          <Link to="/landingpage/cursos/cursoIntermedio1">
             <button className="cursosLista__button_masInfo">Ir al curso</button>
           </Link>{" "}
         </div>
         <div className="cursosLista__card">
-          <h3>Curso Intermedio 2</h3>
+          <h3>Criptomonedas 101 - Nivel Intermedio 2</h3>
           <br />
-          <Link to="CursoIntermedio2">
+          <Link to="/landingpage/cursos/cursoIntermedio2">
             <button className="cursosLista__button_masInfo">Ir al curso</button>
           </Link>{" "}
         </div>
         <div className="cursosLista__card">
-          <h3>Curso Avanzado</h3>
+          <h3>Criptomonedas 101 - Avanzado</h3>
           <br />
-          <Link to="CursoAvanzado">
+          <Link to="/landingpage/cursos/cursoAvanzado">
             <button className="cursosLista__button_masInfo">Ir al curso</button>
           </Link>
         </div>
