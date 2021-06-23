@@ -21,7 +21,7 @@ export const CursoAvanzado_4 = () => {
     const handleApproveCourse = async (e) => {
         e.preventDefault();
         await dispatch(saveUserCourse(courseData, 4, true, false))
-        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado el Curso Avanzado"));
+        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado el Criptomonedas 101 - Avanzado"));
         history.push("/landingpage")
     }
 

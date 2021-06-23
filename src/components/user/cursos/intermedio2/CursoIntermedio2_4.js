@@ -20,7 +20,7 @@ export const CursoIntermedio2_4 = () => {
     const handleApproveCourse = async (e) => {
         e.preventDefault();
         await dispatch(saveUserCourse(courseData, 4, true, false))
-        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado el Curso Intermedio 2"));
+        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado el Criptomonedas 101 - Intermedio 2"));
         history.push("/landingpage")
     }
     return (

@@ -22,7 +22,7 @@ export const CursoBasico_5 = () => {
     const handleApproveCourse = async (e) => {
         e.preventDefault();
         await dispatch(saveUserCourse(courseData, 5, true, false))
-        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado Criptomonedas 101 - Nivel Básico"));
+        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado Criptomonedas 101 - Básico"));
         history.push("/landingpage")
     }
 
