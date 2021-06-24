@@ -42,7 +42,7 @@ export const CursoIntermedio2 = () => {
   const [finishedCourse, setFinishedCourse] = useState(false);
   const courseData = {
     id: "3",
-    name: "Curso Intermedio 2",
+    name: "Criptomonedas 101 - Nivel Intermedio 2",
     route: "cursoIntermedio2",
     steps: 4
   };
@@ -62,10 +62,10 @@ export const CursoIntermedio2 = () => {
     setEnrollButton(!enrollButton);
     if (!enrollButton) {
       dispatch(saveUserCourse(courseData, 1, false, true));
-      dispatch(showOk(courseData.name, "Has abandonado el curso"));
+      dispatch(showOk("Criptomonedas 101 Intermedio 2", "Has abandonado el curso"));
     } else {
       dispatch(saveUserCourse(courseData, 1, false, false));
-      dispatch(showOk(courseData.name, "Te has inscripto al curso"));
+      dispatch(showOk("Criptomonedas 101 Intermedio 2", "Te has inscripto al curso"));
     }
   };
 
@@ -75,7 +75,7 @@ export const CursoIntermedio2 = () => {
         <br /> <br /> <br /> <br /> <br />
         <Carousel slides={slides} autoplay={false} interval={3000} />
         <div className="cursos__container_title">
-          {finishedCourse ? <h1>Curso Intermedio 2: Completado</h1> : <h1>Curso Intermedio 2: </h1>}
+          {finishedCourse ? <h1>Criptomonedas 101 - Intermedio 2: Completado</h1> : <h1>Criptomonedas 101 - Intermedio 2 </h1>}
 
           {enrollButton ? (
             <button
@@ -88,7 +88,7 @@ export const CursoIntermedio2 = () => {
             <>
               {!finishedCourse ?
                 <>
-                  <Link to="/landingpage/cursos/cursoBasico/1">
+                  <Link to="/landingpage/cursos/cursoIntermedio2/1">
                     <button className="cursos__button_inscribir">
                       Ir al contenido
                     </button>

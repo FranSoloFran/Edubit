@@ -12,7 +12,7 @@ export const CursoIntermedio2_4 = () => {
 
     const courseData = {
         id: "3",
-        name: "Curso Intermedio",
+        name: "Criptomonedas 101 - Nivel Intermedio 2",
         route: "cursoIntermedio2",
         steps: 4
     };
@@ -20,13 +20,13 @@ export const CursoIntermedio2_4 = () => {
     const handleApproveCourse = async (e) => {
         e.preventDefault();
         await dispatch(saveUserCourse(courseData, 4, true, false))
-        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado el Criptomonedas 101 - Intermedio 2"));
+        dispatch(showOk("Fin de Curso", "¡Felicidades! Has aprobado Criptomonedas 101 - Intermedio 2"));
         history.push("/landingpage")
     }
     return (
         <div className="cursosContenido__container">
             <div className="cursosContenido__container_title">
-                <h1>Curso Intermedio 2</h1>
+                <h1>Criptomonedas 101 - Intermedio 2</h1>
             </div>
             <div class="cursosContenido__container_progressbar">
                 <ul class="cursosContenido__progressbar">

@@ -18,7 +18,7 @@ export const CursoIntermedio1_4 = () => {
     const handleAdvanceStep = (e) => {
         e.preventDefault()
         dispatch(saveUserCourse(courseData, 5, false, false))
-        history.push("/landingpage")
+        history.push("/landingpage/cursos/cursoIntermedio1/5")
     }
 
     return (

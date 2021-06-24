@@ -10,7 +10,7 @@ export const CursoAvanzado_1 = () => {
 
     const courseData = {
         id: "4",
-        name: "Curso Avanzado",
+        name: "Criptomonedas 101 - Nivel Avanzado",
         route: "cursoAvanzado",
         steps: 4
     };
@@ -24,7 +24,7 @@ export const CursoAvanzado_1 = () => {
     return (
         <div className="cursosContenido__container">
             <div className="cursosContenido__container_title">
-                <h1>Curso Avanzado</h1>
+                <h1>Criptomonedas 101 - Avanzado</h1>
             </div>
             <div class="cursosContenido__container_progressbar">
                 <ul class="cursosContenido__progressbar">
