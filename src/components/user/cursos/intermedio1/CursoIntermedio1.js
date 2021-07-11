@@ -48,13 +48,14 @@ export const CursoIntermedio1 = () => {
   const dispatch = useDispatch();
   const [enrollButton, setEnrollButton] = useState(true);
   const [finishedCourse, setFinishedCourse] = useState(false);
+  const [actualStep, setActualStep] = useState(1);
   const userCourses = useSelector((state) => state.courses.userCourses);
 
   const courseData = {
     id: "2",
     name: "Criptomonedas 101 - Nivel Intermedio 1",
     route: "cursoIntermedio1",
-    steps: 5
+    steps: 6
   };
 
   useState(() => {
@@ -64,6 +65,9 @@ export const CursoIntermedio1 = () => {
       const index = userCourses.findIndex((course) => course.id === courseData.id)
       if (userCourses[index].completed) {
         setFinishedCourse(true);
+      }
+      else {
+        setActualStep(userCourses[index].step)
       }
     }
   }, [userCourses]);
@@ -98,7 +102,7 @@ export const CursoIntermedio1 = () => {
             <>
               {!finishedCourse ?
                 <>
-                  <Link to="/landingpage/cursos/cursoIntermedio1/1">
+                  <Link to={`/landingpage/cursos/cursoIntermedio1/${actualStep}`}>
                     <button className="cursos__button_inscribir">
                       Ir al contenido
                     </button>

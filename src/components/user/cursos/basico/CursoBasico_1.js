@@ -28,7 +28,8 @@ export const CursoBasico_1 = () => {
             </div>
             <div class="cursosContenido__container_progressbar">
                 <ul class="cursosContenido__progressbar">
-                    <li class="active">Criptomonedas: ¿Qué son?</li>
+                    <li class="active">Introducción</li>
+                    <li>Criptomonedas: ¿Qué son?</li>
                     <li>Errores comunes al invertir en criptomonedas</li>
                     <li>Criptomonedas más populares</li>
                     <li>¿Qué es el Bitcoin?</li>
@@ -37,22 +38,13 @@ export const CursoBasico_1 = () => {
             </div>
             <div className="cursosContenido__container_item">
                 <div className="cursosContenido__text_item">
-                    <h2 className="cursosContenido__title_item f2">Criptomonedas: ¿Qué son?</h2>
-                    <br />
-                    <p className="cursosContenido__paragraph_item f4">
-                        Una criptomoneda es un activo digital que emplea un cifrado
-                        criptográfico para garantizar su titularidad y asegurar la
-                        integridad de las transacciones, y controlar la creación de
-                        unidades adicionales, es decir, evitar que alguien pueda hacer
-                        copias como haríamos, por ejemplo, con una foto. Estas monedas no
-                        existen de forma física: se almacenan en una cartera digital.
-                    </p>
+                    <h2 className="cursosContenido__title_item f2">Introducción</h2>
                     <br />
                     <div className="cursosContenido__text_video">
                         <iframe
                             width="100%"
                             height="400"
-                            src="https://www.youtube.com/embed/GkAQH-1ezEQ"
+                            src="https://www.youtube.com/embed/OfP4ixQpwNg"
                             title="YouTube video player"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

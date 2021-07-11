@@ -17,19 +17,23 @@ import { CursoBasico_2 } from "../components/user/cursos/basico/CursoBasico_2";
 import { CursoBasico_3 } from "../components/user/cursos/basico/CursoBasico_3";
 import { CursoBasico_4 } from "../components/user/cursos/basico/CursoBasico_4";
 import { CursoBasico_5 } from "../components/user/cursos/basico/CursoBasico_5";
+import { CursoBasico_6 } from "../components/user/cursos/basico/CursoBasico_6";
 import { CursoIntermedio1_1 } from "../components/user/cursos/intermedio1/CursoIntermedio1_1";
 import { CursoIntermedio1_2 } from "../components/user/cursos/intermedio1/CursoIntermedio1_2";
 import { CursoIntermedio1_3 } from "../components/user/cursos/intermedio1/CursoIntermedio1_3";
 import { CursoIntermedio1_4 } from "../components/user/cursos/intermedio1/CursoIntermedio1_4";
 import { CursoIntermedio1_5 } from "../components/user/cursos/intermedio1/CursoIntermedio1_5";
+import { CursoIntermedio1_6 } from "../components/user/cursos/intermedio1/CursoIntermedio1_6";
 import { CursoIntermedio2_1 } from "../components/user/cursos/intermedio2/CursoIntermedio2_1";
 import { CursoIntermedio2_2 } from "../components/user/cursos/intermedio2/CursoIntermedio2_2";
 import { CursoIntermedio2_3 } from "../components/user/cursos/intermedio2/CursoIntermedio2_3";
 import { CursoIntermedio2_4 } from "../components/user/cursos/intermedio2/CursoIntermedio2_4";
+import { CursoIntermedio2_5 } from "../components/user/cursos/intermedio2/CursoIntermedio2_5";
 import { CursoAvanzado_1 } from "../components/user/cursos/avanzado/CursoAvanzado_1";
 import { CursoAvanzado_2 } from "../components/user/cursos/avanzado/CursoAvanzado_2";
 import { CursoAvanzado_3 } from "../components/user/cursos/avanzado/CursoAvanzado_3";
 import { CursoAvanzado_4 } from "../components/user/cursos/avanzado/CursoAvanzado_4";
+import { CursoAvanzado_5 } from "../components/user/cursos/avanzado/CursoAvanzado_5";
 
 
 
@@ -56,19 +60,23 @@ export const LandingRoute = () => {
           <Route exact path="/landingpage/cursos/cursoBasico/3" component={CursoBasico_3} />
           <Route exact path="/landingpage/cursos/cursoBasico/4" component={CursoBasico_4} />
           <Route exact path="/landingpage/cursos/cursoBasico/5" component={CursoBasico_5} />
+          <Route exact path="/landingpage/cursos/cursoBasico/6" component={CursoBasico_6} />
           <Route exact path="/landingpage/cursos/cursoIntermedio1/1" component={CursoIntermedio1_1} />
           <Route exact path="/landingpage/cursos/cursoIntermedio1/2" component={CursoIntermedio1_2} />
           <Route exact path="/landingpage/cursos/cursoIntermedio1/3" component={CursoIntermedio1_3} />
           <Route exact path="/landingpage/cursos/cursoIntermedio1/4" component={CursoIntermedio1_4} />
           <Route exact path="/landingpage/cursos/cursoIntermedio1/5" component={CursoIntermedio1_5} />
+          <Route exact path="/landingpage/cursos/cursoIntermedio1/6" component={CursoIntermedio1_6} />
           <Route exact path="/landingpage/cursos/cursoIntermedio2/1" component={CursoIntermedio2_1} />
           <Route exact path="/landingpage/cursos/cursoIntermedio2/2" component={CursoIntermedio2_2} />
           <Route exact path="/landingpage/cursos/cursoIntermedio2/3" component={CursoIntermedio2_3} />
           <Route exact path="/landingpage/cursos/cursoIntermedio2/4" component={CursoIntermedio2_4} />
+          <Route exact path="/landingpage/cursos/cursoIntermedio2/5" component={CursoIntermedio2_5} />
           <Route exact path="/landingpage/cursos/cursoAvanzado/1" component={CursoAvanzado_1} />
           <Route exact path="/landingpage/cursos/cursoAvanzado/2" component={CursoAvanzado_2} />
           <Route exact path="/landingpage/cursos/cursoAvanzado/3" component={CursoAvanzado_3} />
           <Route exact path="/landingpage/cursos/cursoAvanzado/4" component={CursoAvanzado_4} />
+          <Route exact path="/landingpage/cursos/cursoAvanzado/5" component={CursoAvanzado_5} />
           <Redirect to="/landingpage" />
         </Switch>
       </div>

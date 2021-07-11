@@ -27,7 +27,7 @@
 
 }
 
-.cursosLista__button_masInfo{
+.cursosLista__button_color1{
 	border: none;
 	border-radius: 10px;
 	color: white;
@@ -37,6 +37,28 @@
 	padding: 8px 10px 8px 10px;
 	width: 250px;
 	background-color: #02b902;
+	transition: color .3s ease;
+	margin: 10px;
+
+	&:focus {
+		outline: none
+	}
+
+	&:hover {
+		color: darken($color: white, $amount: 20);
+	}
+}
+
+.cursosLista__button_color2{
+	border: none;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 18px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding: 8px 10px 8px 10px;
+	width: 250px;
+	background-color: #0099ff;
 	transition: color .3s ease;
 	margin: 10px;
 
@@ -80,7 +102,7 @@
   }
   
   .progress > span {
-	background-color: #02b902;
+	background-color: #0099ff;
 	display: block;
 	height: 100%;
 	overflow: hidden;

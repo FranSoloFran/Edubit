@@ -28,17 +28,17 @@ export const MisCursos = () => {
                 <h3>{course.name}</h3>
                 <br />
                 <div class="progress">
-                  <span style={{ width: course.step === 1 ? "0%" : (course.step - 1) * 100 / course.steps + "%" }}>{course.step !== 1 ? (course.step - 1) * 100 / course.steps + "%" : null}</span>
+                  <span style={{ width: course.step === 1 ? "0%" : parseInt((course.step - 1) * 100 / course.steps) + "%" }}>{course.step !== 1 ? parseInt((course.step - 1) * 100 / course.steps) + "%" : null}</span>
                 </div>
                 <br />
                 <div className="cursosLista__container_buttons_conCursos">
                   <Link to={`/landingpage/cursos/${course.route}`}>
-                    <button className="cursosLista__button_masInfo">
+                    <button className="cursosLista__button_color1">
                       Temario
                     </button>
                   </Link>
                   <Link to={`/landingpage/cursos/${course.route}/${course.step}`}>
-                    <button className="cursosLista__button_masInfo">
+                    <button className="cursosLista__button_color1">
                       Ir al curso
                     </button>
                   </Link>
@@ -51,7 +51,7 @@ export const MisCursos = () => {
             <p className="cursos__paragraph_item f4"> No está inscripto a ningún curso</p>
             <br />
             <Link to="/landingpage/cursos">
-              <button className="cursosLista__button_masInfo" style={{ marginLeft: '80px' }}>
+              <button className="cursosLista__button_color1" style={{ marginLeft: '80px' }}>
                 Ver catálogo
               </button>
             </Link>
@@ -70,7 +70,7 @@ export const MisCursos = () => {
                 <h3>{course.name}</h3>
                 <br />
                 <Link to={`/landingpage/cursos/${course.route}`}>
-                  <button className="cursosLista__button_masInfo">
+                  <button className="cursosLista__button_color1">
                     Temario
                   </button>
                 </Link>

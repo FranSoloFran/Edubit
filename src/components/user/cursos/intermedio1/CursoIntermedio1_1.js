@@ -13,7 +13,7 @@ export const CursoIntermedio1_1 = () => {
         id: "2",
         name: "Criptomonedas 101 - Nivel Intermedio 1",
         route: "cursoIntermedio1",
-        steps: 5
+        steps: 6
     };
 
     const handleAdvanceStep = (e) => {
@@ -30,7 +30,8 @@ export const CursoIntermedio1_1 = () => {
             </div>
             <div class="cursosContenido__container_progressbar">
                 <ul class="cursosContenido__progressbar">
-                    <li class="active">¿Qué determina el precio de una criptomoneda?</li>
+                    <li class="active">Introducción</li>
+                    <li>¿Qué determina el precio de una criptomoneda?</li>
                     <li>Cuestiones legales de las criptomonedas</li>
                     <li>Cómo evitar inconvenientes legales</li>
                     <li>Comprar/vender criptomonedas en Argentina.</li>
@@ -39,17 +40,13 @@ export const CursoIntermedio1_1 = () => {
             </div>
             <div className="cursosContenido__container_item">
                 <div className="cursosContenido__text_item">
-                    <h2 className="cursosContenido__title_item f2">¿Qué determina el precio de una criptomoneda?</h2>
-                    <br />
-                    <p className="cursosContenido__paragraph_item f4">
-                        El valor de las criptomonedas varía en función de la oferta, de la demanda, y del compromiso de los usuarios. Este valor se  forma  en  ausencia  de mecanismos  eficaces  que  impidan  su  manipulación,  como  los  presentes  en  los  mercados regulados  de  valores.  En  muchas  ocasiones  los  precios  se  forman  también  sin  información pública que los respalde.
-                    </p>
+                    <h2 className="cursosContenido__title_item f2">Introducción</h2>
                     <br />
                     <div className="cursosContenido__text_video">
                         <iframe
                             width="100%"
                             height="400"
-                            src="https://www.youtube.com/embed/fWdzIB1wJf0  "
+                            src="https://www.youtube.com/embed/W2lhCq9CKRw"
                             title="YouTube video player"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
