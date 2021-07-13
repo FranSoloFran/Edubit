@@ -115,17 +115,17 @@ $color-form-highlight: #EEEEEE;
 	text-align: center;
 }
   
-ol {
+.cursos__container_temario ol {
 	line-height: 2;
   }
   
-  ol li {
+  .cursos__container_temario ol li {
 	list-style-type: none;
 	counter-increment: item;
 	text-align: justify;
   }
   
-  ol li:before {
+  .cursos__container_temario ol li:before {
 	content: counter(item);
 	display: inline-block;
 	width: 12px;
