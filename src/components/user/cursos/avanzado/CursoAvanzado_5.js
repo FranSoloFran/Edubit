@@ -45,68 +45,53 @@ export const CursoAvanzado_5 = () => {
                     <br />
                     <div className="cursosContenido__container_evaluacion">
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 1:</p>
+                            <p>¿Cuales de las siguientes son estragias de trading pasivas?</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-1">Day trading</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Opción 2</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Swing trading</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-3">Inversión en índices</label>
+                            </div>
+                            <div className="cursosContenido__container_evaluacion_opcion ">
+                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-3" />
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-3">Todas las anteriores</label>
                             </div>
                         </div>
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 2:</p>
+                            <p>Lo mas conveniente es tener una cartera de inversión solo con criptomonedas o solo con acciones, nunca ambas</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-1">Verdadero</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-2">Opción 2</label>
-                            </div>
-                            <div className="cursosContenido__container_evaluacion_opcion ">
-                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-2">Falso</label>
                             </div>
                         </div>
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 3:</p>
+                            <p>Las inversiones en criptomonedas se pueden realizar:</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-1">A largo plazo</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Opción 2</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">A corto plazo</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-3">Opción 3</label>
-                            </div>
-                        </div>
-                        <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 4:</p>
-                            <div className="cursosContenido__container_evaluacion_opcion ">
-                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p4-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-1">Opción 1</label>
-                            </div>
-                            <div className="cursosContenido__container_evaluacion_opcion ">
-                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p4-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-2">Opción 2</label>
-                            </div>
-                            <div className="cursosContenido__container_evaluacion_opcion ">
-                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p4-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-3">Ambas</label>
                             </div>
                         </div>
                     </div>
                     <br />
-                    <div className="cursosContenido__container_navegacion">
+                    <div className="cursosContenido__container_navegacion" style={{ marginLeft: "150px" }}>
                         <Link to="/landingpage/cursos/cursoAvanzado/4">
                             <button className="cursos__button_navegacion">
                                 Anterior

@@ -37,7 +37,7 @@ export const CursoAvanzado_1 = () => {
             </div>
             <div className="cursosContenido__container_item">
                 <div className="cursosContenido__text_item">
-                    <h2 className="cursosContenido__title_item f2">¿Cuáles son las estrategias de trading para distintos perfiles de inversión?</h2>
+                    <h2 className="cursosContenido__title_item f2">Introducción</h2>
                     <br />
                     <div className="cursosContenido__text_video">
                         <iframe

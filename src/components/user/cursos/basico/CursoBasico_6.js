@@ -47,63 +47,71 @@ export const CursoBasico_6 = () => {
                     <br />
                     <div className="cursosContenido__container_evaluacion">
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 1:</p>
+                            <p>¿Que es una criptomoneda?</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-1">La moneda que usan los criptógrafos</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Opción 2</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Un activo físico que emplea un cifrado criptográfico</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-3">Un activo digital que emplea un cifrado criptográfico</label>
+                            </div>
+                            <div className="cursosContenido__container_evaluacion_opcion ">
+                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p1-3" />
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-3">D) Un activo imaginario que emplea un cifrado criptográfico</label>
                             </div>
                         </div>
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 2:</p>
+                            <p>¿Cuáles son los errores que se deben evitar para invertir en Bitcoin?</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-1">No tener conocimientos sobre Bitcoin y el funcionamiento de criptomonedas</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-2">Opción 2</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-2">Operar con dinero que se pueda necesitar</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-3">Perseguir las ganancias rápidas</label>
+                            </div>
+                            <div className="cursosContenido__container_evaluacion_opcion ">
+                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p2-3" />
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p2-3">Todas las anteriores</label>
                             </div>
                         </div>
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 3:</p>
+                            <p> ¿Cuales son algunas de las criptomonedas mas populares?</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-1">Bitcoin, Pluscoin, Nxt, Ethereum</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Opción 2</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p1-2">Ethereum, Monero, Bitcoin, Litecoin</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-3">Bitcoin, Ripple, Ethereum, Fcash</label>
+                            </div>
+                            <div className="cursosContenido__container_evaluacion_opcion ">
+                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p3-3" />
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p3-3">Litecoin, Stellar, Monedero, Zxt</label>
                             </div>
                         </div>
                         <div className="cursosContenido__container_evaluacion_pregunta">
-                            <p>Pregunta 4:</p>
+                            <p>Bitcoin es una moneda descentralizada</p>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p4-1" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-1">Opción 1</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-1">Verdadero</label>
                             </div>
                             <div className="cursosContenido__container_evaluacion_opcion ">
                                 <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p4-2" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-2">Opción 2</label>
-                            </div>
-                            <div className="cursosContenido__container_evaluacion_opcion ">
-                                <input className="cursosContenido__evaluacion_opcion_item" type="radio" id="p4-3" />
-                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-3">Opción 3</label>
+                                <label className="cursosContenido__evaluacion_opcion_item" for="p4-2">Falso</label>
                             </div>
                         </div>
                     </div>
@@ -114,7 +122,7 @@ export const CursoBasico_6 = () => {
                                 Anterior
                             </button>
                         </Link>
-                        <button className="cursos__button_navegacion" onClick={(e) => handleApproveCourse(e)}>
+                        <button className="cursos__button_navegacion" onClick={(e) => handleApproveCourse(e)} style={{ marginLeft: "200px" }}>
                             Finalizar
                         </button>
                     </div>
