@@ -205,8 +205,7 @@ const selectCoinDayC = (selectCoinDay) => {
 export const infoCoinMarketPrice = (day) => {
   return async (dispatch, getState) => {
     await fetch(
-      `${urlApi}/coins/${
-        getState().trading.selectCoin.id
+      `${urlApi}/coins/${getState().trading.selectCoin.id
       }/market_chart?vs_currency=USD&days=${day}`
     )
       .then((response) => response.json())
@@ -584,18 +583,18 @@ export const getDolar = () => {
     const today = new Date();
     dolar.oficial = {
       fecha: today,
-      compra: 94.71,
-      venta: 100.71,
+      compra: 95.63,
+      venta: 101.63,
     };
     dolar.blue = {
       fecha: today,
-      compra: 159.0,
-      venta: 164.0,
+      compra: 172.0,
+      venta: 177.0,
     };
     dolar.bolsa = {
       fecha: today,
-      compra: 159.91,
-      venta: 159.75,
+      compra: 165.96,
+      venta: 165.65,
     };
 
     dispatch(setDolar(dolar));
